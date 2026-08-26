@@ -96,7 +96,7 @@ export default function Login() {
 
             {/* Main Login Primary Button */}
             <PrimaryButton onClick={handleMainLogin}>
-              Login with Ease.!
+              Login 
             </PrimaryButton>
 
             {/* Workspace Creation Link */}
