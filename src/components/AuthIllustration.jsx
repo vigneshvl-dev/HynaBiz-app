@@ -1,5 +1,7 @@
 import React from 'react'
 import logoImg from '../assets/logo.png'
+import boy1Img from '../assets/boy1.png'
+import boy2Img from '../assets/boy2.png'
 
 export default function AuthIllustration() {
   return (
@@ -13,21 +15,7 @@ export default function AuthIllustration() {
         {/* Left Communicating Character Card */}
         <div className="scene-card scene-card-left">
           <div className="character-avatar avatar-female">
-            <svg viewBox="0 0 48 48" className="avatar-svg">
-              <circle cx="24" cy="24" r="22" fill="#dbeafe" />
-              {/* Hair */}
-              <path d="M12 24c0-7 5.5-13 12-13s12 6 12 13v6H12v-6z" fill="#0284c7" />
-              {/* Face */}
-              <circle cx="24" cy="22" r="9" fill="#fcd34d" />
-              {/* Glasses */}
-              <rect x="18" y="19" width="5" height="4" rx="1.5" fill="none" stroke="#0369a1" strokeWidth="1.2" />
-              <rect x="25" y="19" width="5" height="4" rx="1.5" fill="none" stroke="#0369a1" strokeWidth="1.2" />
-              <line x1="23" y1="21" x2="25" y2="21" stroke="#0369a1" strokeWidth="1.2" />
-              {/* Smile */}
-              <path d="M22 26q2 1.5 4 0" stroke="#0f172a" strokeWidth="1.2" strokeLinecap="round" fill="none" />
-              {/* Clothes */}
-              <path d="M14 42c0-5.5 4.5-10 10-10s10 4.5 10 10" fill="#0066ff" />
-            </svg>
+            <img src={boy1Img} alt="Boy 1" className="avatar-img" />
           </div>
           
           {/* Chat Bubble Left */}
@@ -54,20 +42,7 @@ export default function AuthIllustration() {
         {/* Right Communicating Character Card */}
         <div className="scene-card scene-card-right">
           <div className="character-avatar avatar-male">
-            <svg viewBox="0 0 48 48" className="avatar-svg">
-              <circle cx="24" cy="24" r="22" fill="#e0f2fe" />
-              {/* Hair */}
-              <path d="M15 17c2-5 7-6 10-6 4 0 8 3 8 7 0 2-1 4-2 5l-16-6z" fill="#0f172a" />
-              {/* Face */}
-              <circle cx="24" cy="23" r="9" fill="#fde68a" />
-              {/* Eyes */}
-              <circle cx="21" cy="22" r="1.2" fill="#0f172a" />
-              <circle cx="27" cy="22" r="1.2" fill="#0f172a" />
-              {/* Smile */}
-              <path d="M22 26q2 1.5 4 0" stroke="#0f172a" strokeWidth="1.2" strokeLinecap="round" fill="none" />
-              {/* Clothes */}
-              <path d="M13 42c0-6 5-11 11-11s11 5 11 11" fill="#0284c7" />
-            </svg>
+            <img src={boy2Img} alt="Boy 2" className="avatar-img" />
           </div>
 
           {/* Chat Bubble Right */}
