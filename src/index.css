@@ -2,8 +2,21 @@
    HynaBiz - Mobile-First Phone Screen Preview & Splash System
    ========================================================================== */
 
+@import './styles/login.css';
+@import './styles/workspace.css';
+
 :root {
-  /* Color Palette */
+  /* HYNABIZ Design System Variables */
+  --hynabiz-blue: #0066ff;
+  --hynabiz-blue-hover: #0052cc;
+  --hynabiz-dark: #091124;
+  --hynabiz-light-blue: #ebf4ff;
+  --text-primary: #0f172a;
+  --text-secondary: #64748b;
+  --border-color: #e2e8f0;
+  --white: #ffffff;
+
+  /* Color Palette & Accents */
   --bg-pure-white: #ffffff;
   --bg-studio: #f1f5f9;
   

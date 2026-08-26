@@ -1,0 +1,683 @@
+/* ==========================================================================
+   HYNABIZ - Login & Welcome Screen Styles
+   ========================================================================== */
+
+/* --- Full Screen Blue Background Canvas --- */
+.login-canvas-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at 50% 20%, #1e40af 0%, #0f2b74 45%, #08173d 100%);
+  padding: 16px;
+  overflow: hidden;
+}
+
+/* Ambient canvas background orbs */
+.canvas-ambient-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.canvas-ambient-glow.glow-top {
+  top: -80px;
+  left: 30%;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(0, 102, 255, 0.45) 0%, rgba(0, 210, 255, 0) 70%);
+  animation: floatOrbTop 10s ease-in-out infinite alternate;
+}
+
+.canvas-ambient-glow.glow-bottom {
+  bottom: -60px;
+  right: 25%;
+  width: 380px;
+  height: 380px;
+  background: radial-gradient(circle, rgba(2, 132, 199, 0.35) 0%, rgba(0, 102, 255, 0) 70%);
+  animation: pulseCenter 8s ease-in-out infinite alternate;
+}
+
+/* --- Centered Mobile-Style Phone Device Card --- */
+.auth-phone-card {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 390px;
+  height: 844px;
+  max-height: calc(100vh - 24px);
+  max-height: calc(100dvh - 24px);
+  background: #f8fafc;
+  border-radius: 44px;
+  border: 9px solid #1e293b;
+  box-shadow: 
+    0 30px 70px -15px rgba(0, 15, 50, 0.6),
+    0 0 0 1px rgba(255, 255, 255, 0.2),
+    inset 0 0 0 1px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+.auth-status-bar {
+  background: #e6f1fe;
+  color: #0f172a;
+}
+
+/* --- Auth Viewport Container --- */
+.auth-viewport {
+  position: relative;
+  flex: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: linear-gradient(180deg, #e6f1fe 0%, #edf5ff 40%, #ffffff 100%);
+  scrollbar-width: none;
+}
+
+.auth-viewport::-webkit-scrollbar {
+  display: none;
+}
+
+/* --- Top Section: Light Blue Illustration Area --- */
+.auth-top-illustration-section {
+  position: relative;
+  width: 100%;
+  flex: 1.1;
+  min-height: 270px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 16px 8px 16px;
+  background: radial-gradient(circle at 50% 40%, #e0f0fe 0%, #eaf3ff 60%, #e4effe 100%);
+  overflow: hidden;
+}
+
+/* --- Auth Illustration Container --- */
+.auth-illustration-container {
+  position: relative;
+  width: 100%;
+  max-width: 320px;
+  height: 240px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.illustration-ambient-aura {
+  position: absolute;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 102, 255, 0.14) 0%, rgba(255, 255, 255, 0) 70%);
+  filter: blur(20px);
+}
+
+.illustration-scene {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Communicating Character Cards */
+.scene-card {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.scene-card-left {
+  left: 4px;
+  top: 15px;
+}
+
+.scene-card-right {
+  right: 4px;
+  top: 15px;
+}
+
+.character-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #ffffff;
+  padding: 3px;
+  box-shadow: 0 8px 20px rgba(0, 102, 255, 0.16), 0 2px 6px rgba(0, 0, 0, 0.06);
+  border: 2px solid #ffffff;
+  transition: transform 0.3s ease;
+}
+
+.character-avatar:hover {
+  transform: scale(1.06);
+}
+
+.avatar-svg {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  display: block;
+}
+
+/* Chat Bubbles */
+.chat-bubble {
+  position: absolute;
+  background: #ffffff;
+  padding: 5px 10px;
+  border-radius: 12px;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #0f172a;
+  box-shadow: 0 6px 16px rgba(0, 80, 200, 0.14);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  white-space: nowrap;
+  z-index: 6;
+  border: 1px solid rgba(226, 232, 240, 0.8);
+}
+
+.chat-bubble-left {
+  top: -24px;
+  left: 10px;
+}
+
+.chat-bubble-right {
+  top: -24px;
+  right: 6px;
+}
+
+.bubble-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.dot-blue {
+  background: #0066ff;
+}
+
+.bubble-tail {
+  position: absolute;
+  bottom: -5px;
+  left: 14px;
+  width: 8px;
+  height: 8px;
+  background: #ffffff;
+  transform: rotate(45deg);
+  border-right: 1px solid rgba(226, 232, 240, 0.8);
+  border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+}
+
+.bubble-tail.tail-right {
+  left: auto;
+  right: 14px;
+}
+
+/* Central HYNABIZ Hub / Medallion */
+.scene-center-hub {
+  position: relative;
+  z-index: 6;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.hub-ripple-ring {
+  position: absolute;
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  border: 1.5px dashed rgba(0, 102, 255, 0.28);
+  animation: hubRotate 20s linear infinite;
+}
+
+.hub-ripple-2 {
+  width: 120px;
+  height: 120px;
+  border: 1px solid rgba(0, 102, 255, 0.12);
+  animation: hubRotateReverse 25s linear infinite;
+}
+
+.hub-badge {
+  position: relative;
+  z-index: 4;
+  width: 68px;
+  height: 68px;
+  border-radius: 20px;
+  background: linear-gradient(145deg, #ffffff 0%, #f0f7ff 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 
+    0 12px 28px rgba(0, 102, 255, 0.24),
+    0 2px 6px rgba(0, 0, 0, 0.05),
+    inset 0 0 0 1.5px rgba(255, 255, 255, 0.9);
+  padding: 8px;
+}
+
+.hub-logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 8px rgba(0, 102, 255, 0.25));
+}
+
+.hub-tag {
+  margin-top: 6px;
+  background: #0f172a;
+  color: #ffffff;
+  font-family: var(--font-display);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 3px 8px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.hub-tag-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #00d2ff;
+}
+
+/* Floating Badges & Connectors */
+.floating-badge {
+  position: absolute;
+  z-index: 5;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 14px rgba(0, 70, 180, 0.12);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+}
+
+.badge-top-left {
+  top: 10px;
+  left: 80px;
+}
+
+.badge-top-right {
+  top: 12px;
+  right: 80px;
+}
+
+.badge-bottom-center {
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  gap: 3px;
+  padding: 3px 8px;
+  border-radius: 16px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #0066ff;
+}
+
+.scene-connection-lines {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.animated-dash {
+  animation: dashAnimation 15s linear infinite;
+}
+
+/* --- Floating Animations --- */
+.floating-slow {
+  animation: floatAnimation 4s ease-in-out infinite alternate;
+}
+
+.floating-fast {
+  animation: floatAnimation 2.8s ease-in-out infinite alternate;
+}
+
+.floating-delayed {
+  animation: floatAnimation 3.5s ease-in-out infinite alternate 1s;
+}
+
+.pulse-gentle {
+  animation: pulseBadge 3s ease-in-out infinite alternate;
+}
+
+@keyframes floatAnimation {
+  0% { transform: translateY(0px); }
+  100% { transform: translateY(-6px); }
+}
+
+@keyframes pulseBadge {
+  0% { transform: scale(0.97); }
+  100% { transform: scale(1.03); }
+}
+
+@keyframes hubRotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes hubRotateReverse {
+  0% { transform: rotate(360deg); }
+  100% { transform: rotate(0deg); }
+}
+
+@keyframes dashAnimation {
+  to { stroke-dashoffset: -100; }
+}
+
+/* ==========================================================================
+   Bottom Section: White Authentication Section
+   ========================================================================== */
+.auth-bottom-sheet {
+  position: relative;
+  z-index: 10;
+  background: #ffffff;
+  border-top-left-radius: 32px;
+  border-top-right-radius: 32px;
+  box-shadow: 0 -12px 35px rgba(0, 40, 120, 0.07);
+  padding: 26px 24px 20px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* Welcome Typography */
+.auth-header-group {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.auth-title {
+  font-family: var(--font-display);
+  font-size: 1.48rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #091124;
+  line-height: 1.2;
+}
+
+.auth-subtitle {
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: #64748b;
+  letter-spacing: 0.01em;
+}
+
+/* --- Social Login Row --- */
+.social-login-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 18px;
+}
+
+.social-login-grid {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+}
+
+.social-btn {
+  position: relative;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: #f8fafc;
+  border: 1.5px solid #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.04);
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  outline: none;
+}
+
+.social-btn:hover {
+  background: #ffffff;
+  border-color: #93c5fd;
+  transform: translateY(-2.5px);
+  box-shadow: 0 8px 16px rgba(0, 102, 255, 0.14);
+}
+
+.social-btn:active {
+  transform: translateY(0) scale(0.95);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+}
+
+.social-btn:focus-visible {
+  border-color: #0066ff;
+  box-shadow: 0 0 0 3px rgba(0, 102, 255, 0.25);
+}
+
+.social-icon {
+  display: block;
+}
+
+/* --- Divider --- */
+.auth-divider {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.divider-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(226, 232, 240, 0.2) 0%, #e2e8f0 50%, rgba(226, 232, 240, 0.2) 100%);
+}
+
+.divider-text {
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #94a3b8;
+  text-transform: capitalize;
+}
+
+/* --- Main Primary Button --- */
+.primary-auth-button {
+  width: 100%;
+  height: 50px;
+  border-radius: 25px;
+  background: linear-gradient(135deg, #0066ff 0%, #0052cc 100%);
+  border: none;
+  color: #ffffff;
+  font-family: var(--font-body);
+  font-size: 0.98rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 24px rgba(0, 102, 255, 0.32);
+  transition: all 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+  outline: none;
+  margin-bottom: 18px;
+}
+
+.primary-auth-button:hover {
+  background: linear-gradient(135deg, #005ce6 0%, #0047b3 100%);
+  transform: translateY(-1.5px);
+  box-shadow: 0 14px 28px rgba(0, 102, 255, 0.4);
+}
+
+.primary-auth-button:active {
+  transform: translateY(1px) scale(0.985);
+  box-shadow: 0 4px 12px rgba(0, 102, 255, 0.25);
+}
+
+.primary-auth-button:focus-visible {
+  box-shadow: 0 0 0 3.5px rgba(0, 102, 255, 0.35);
+}
+
+/* --- Workspace Action Link --- */
+.workspace-action-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 4px;
+}
+
+.workspace-link-btn {
+  background: transparent;
+  border: none;
+  color: #0066ff;
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+.workspace-link-btn:hover {
+  color: #0047b3;
+  background: rgba(0, 102, 255, 0.06);
+}
+
+.workspace-link-arrow {
+  display: inline-block;
+  font-size: 1.1rem;
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.workspace-link-btn:hover .workspace-link-arrow {
+  transform: translateX(4px);
+}
+
+.workspace-link-btn:focus-visible {
+  box-shadow: 0 0 0 2px rgba(0, 102, 255, 0.3);
+}
+
+/* --- Floating Toast Notification --- */
+.toast-notification {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  width: 90%;
+  max-width: 320px;
+  animation: toastSlideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.toast-content {
+  background: #0f172a;
+  color: #ffffff;
+  padding: 10px 14px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.toast-icon {
+  font-size: 0.95rem;
+}
+
+.toast-text {
+  flex: 1;
+}
+
+.toast-close {
+  background: transparent;
+  border: none;
+  color: #94a3b8;
+  font-size: 1.2rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0 4px;
+}
+
+.toast-close:hover {
+  color: #ffffff;
+}
+
+@keyframes toastSlideUp {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, 15px) scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, 0) scale(1);
+  }
+}
+
+/* ==========================================================================
+   Responsive Adaptations
+   ========================================================================== */
+@media (max-width: 480px) {
+  .login-canvas-wrapper {
+    padding: 0;
+    background: #ffffff;
+  }
+
+  .auth-phone-card {
+    max-width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    max-height: 100vh;
+    max-height: 100dvh;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .auth-top-illustration-section {
+    min-height: 240px;
+  }
+
+  .auth-bottom-sheet {
+    padding: 22px 20px calc(20px + env(safe-area-inset-bottom, 8px)) 20px;
+  }
+}
