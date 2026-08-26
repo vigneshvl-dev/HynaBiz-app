@@ -6,7 +6,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: radial-gradient(circle at 50% 20%, #1e40af 0%, #0f2b74 45%, #08173d 100%);
+  background: #ffffff;
   padding: 16px;
   overflow: hidden;
 }
@@ -24,7 +24,7 @@
   left: 30%;
   width: 400px;
   height: 400px;
-  background: radial-gradient(circle, rgba(0, 102, 255, 0.45) 0%, rgba(0, 210, 255, 0) 70%);
+  background: radial-gradient(circle, rgba(0, 102, 255, 0.08) 0%, rgba(0, 210, 255, 0) 70%);
   animation: floatOrbTop 10s ease-in-out infinite alternate;
 }
 
@@ -33,7 +33,7 @@
   right: 25%;
   width: 380px;
   height: 380px;
-  background: radial-gradient(circle, rgba(2, 132, 199, 0.35) 0%, rgba(0, 102, 255, 0) 70%);
+  background: radial-gradient(circle, rgba(2, 132, 199, 0.07) 0%, rgba(0, 102, 255, 0) 70%);
   animation: pulseCenter 8s ease-in-out infinite alternate;
 }
 
