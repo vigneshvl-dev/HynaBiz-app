@@ -1,5 +1,5 @@
 import React from 'react'
-import logoImg from '../assets/logo.png'
+import Logo from './Logo'
 
 export default function SplashScreen() {
   return (
@@ -49,12 +49,7 @@ export default function SplashScreen() {
             <div className="logo-wrapper">
               <div className="logo-backlight-pulse" />
               <div className="logo-container">
-                <img
-                  src={logoImg}
-                  alt="HynaBiz Logo"
-                  className="brand-logo"
-                  loading="eager"
-                />
+                <Logo className="brand-logo" />
               </div>
             </div>
 

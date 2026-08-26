@@ -1,7 +1,53 @@
 import React from 'react'
-import logoImg from '../assets/logo.png'
-import boy1Img from '../assets/boy1.png'
-import boy2Img from '../assets/boy2.png'
+import Logo from './Logo'
+
+const Boy1Avatar = () => (
+  <svg viewBox="0 0 100 100" className="avatar-svg" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="bg-grad-1" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#dbeafe" />
+        <stop offset="100%" stopColor="#bfdbfe" />
+      </linearGradient>
+      <linearGradient id="shirt-grad-1" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stopColor="#3b82f6" />
+        <stop offset="100%" stopColor="#1d4ed8" />
+      </linearGradient>
+    </defs>
+    <circle cx="50" cy="50" r="48" fill="url(#bg-grad-1)" />
+    <path d="M 22 90 C 22 75, 30 65, 50 65 C 70 65, 78 75, 78 90 Z" fill="url(#shirt-grad-1)" />
+    <rect x="44" y="52" width="12" height="15" rx="3" fill="#fcd34d" />
+    <circle cx="50" cy="38" r="18" fill="#fcd34d" />
+    <path d="M 32 36 C 32 20, 68 20, 68 36 C 68 30, 62 25, 50 25 C 38 25, 32 30, 32 36 Z" fill="#1e293b" />
+    <path d="M 32 36 Q 36 30 45 34 Q 50 32 55 35 Q 68 32 68 36" fill="#1e293b" />
+    <rect x="36" y="34" width="11" height="8" rx="2" fill="none" stroke="#1e293b" strokeWidth="2" />
+    <rect x="53" y="34" width="11" height="8" rx="2" fill="none" stroke="#1e293b" strokeWidth="2" />
+    <line x1="47" y1="38" x2="53" y2="38" stroke="#1e293b" strokeWidth="2" />
+    <path d="M 45 47 Q 50 50 55 47" stroke="#1e293b" strokeWidth="2" strokeLinecap="round" fill="none" />
+  </svg>
+)
+
+const Boy2Avatar = () => (
+  <svg viewBox="0 0 100 100" className="avatar-svg" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="bg-grad-2" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="#ffedd5" />
+        <stop offset="100%" stopColor="#fed7aa" />
+      </linearGradient>
+      <linearGradient id="shirt-grad-2" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stopColor="#0f766e" />
+        <stop offset="100%" stopColor="#115e59" />
+      </linearGradient>
+    </defs>
+    <circle cx="50" cy="50" r="48" fill="url(#bg-grad-2)" />
+    <path d="M 22 90 C 22 75, 30 65, 50 65 C 70 65, 78 75, 78 90 Z" fill="url(#shirt-grad-2)" />
+    <rect x="44" y="52" width="12" height="15" rx="3" fill="#fdba74" />
+    <circle cx="50" cy="38" r="18" fill="#fdba74" />
+    <path d="M 32 30 C 35 15, 65 15, 68 30 L 68 38 L 32 38 Z" fill="#475569" />
+    <circle cx="43" cy="36" r="2.5" fill="#1e293b" />
+    <circle cx="57" cy="36" r="2.5" fill="#1e293b" />
+    <path d="M 44 46 Q 50 51 56 46" stroke="#1e293b" strokeWidth="2.5" strokeLinecap="round" fill="none" />
+  </svg>
+)
 
 export default function AuthIllustration() {
   return (
@@ -15,7 +61,7 @@ export default function AuthIllustration() {
         {/* Left Communicating Character Card */}
         <div className="scene-card scene-card-left">
           <div className="character-avatar avatar-female">
-            <img src={boy1Img} alt="Boy 1" className="avatar-img" />
+            <Boy1Avatar />
           </div>
           
           {/* Chat Bubble Left */}
@@ -31,7 +77,7 @@ export default function AuthIllustration() {
           <div className="hub-ripple-ring" />
           <div className="hub-ripple-ring hub-ripple-2" />
           <div className="hub-badge pulse-gentle">
-            <img src={logoImg} alt="HYNABIZ Emblem" className="hub-logo-img" />
+            <Logo className="hub-logo-img" />
           </div>
           <div className="hub-tag">
             <span className="hub-tag-dot" />
@@ -42,7 +88,7 @@ export default function AuthIllustration() {
         {/* Right Communicating Character Card */}
         <div className="scene-card scene-card-right">
           <div className="character-avatar avatar-male">
-            <img src={boy2Img} alt="Boy 2" className="avatar-img" />
+            <Boy2Avatar />
           </div>
 
           {/* Chat Bubble Right */}
@@ -84,3 +130,4 @@ export default function AuthIllustration() {
     </div>
   )
 }
+

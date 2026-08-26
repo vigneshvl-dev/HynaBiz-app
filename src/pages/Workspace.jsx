@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import logoImg from '../assets/logo.png'
+import Logo from '../components/Logo'
 import PrimaryButton from '../components/PrimaryButton'
 import Toast from '../components/Toast'
 
@@ -60,7 +60,7 @@ export default function Workspace() {
               ← Back to Login
             </button>
             <div className="workspace-logo-badge">
-              <img src={logoImg} alt="HYNABIZ Logo" className="workspace-logo-img" />
+              <Logo className="workspace-logo-img" />
             </div>
             <h1 className="workspace-title">Create Workspace</h1>
             <p className="workspace-subtitle">
