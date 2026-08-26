@@ -5,14 +5,17 @@ import SocialLogin from '../components/SocialLogin'
 import Divider from '../components/Divider'
 import PrimaryButton from '../components/PrimaryButton'
 import Toast from '../components/Toast'
+
 export default function Login() {
   const navigate = useNavigate()
   const [toastMessage, setToastMessage] = useState('')
   const [toastVisible, setToastVisible] = useState(false)
+
   const showToast = (message) => {
     setToastMessage(message)
     setToastVisible(true)
   }
+
   useEffect(() => {
     if (toastVisible) {
       const timer = setTimeout(() => {
@@ -21,15 +24,15 @@ export default function Login() {
       return () => clearTimeout(timer)
     }
   }, [toastVisible])
+
   const handleMainLogin = () => {
     showToast('Login functionality will be connected soon.')
   }
+
   const handleSocialLogin = (message) => {
     showToast(message)
   }
-  const handleCreateWorkspace = () => {
-    navigate('/workspace')
-  }
+
   return (
     <div className="login-canvas-wrapper">
       <div className="canvas-ambient-glow glow-top" />
@@ -55,43 +58,39 @@ export default function Login() {
             </div>
           </div>
         </div>
+
         <div className="auth-viewport">
           <div className="auth-top-illustration-section">
             <AuthIllustration />
           </div>
+
           <div className="auth-bottom-sheet">
             <div className="auth-header-group">
-              <h1 className="auth-title">Welcome to HYNABIZ</h1>
+              <h1 className="auth-title">
+                Welcome to <span className="auth-title-gradient">HYNABIZ</span>
+              </h1>
               <p className="auth-subtitle">Start your journey with</p>
             </div>
+
             <SocialLogin onSocialClick={handleSocialLogin} />
             <Divider text="Or" />
             <PrimaryButton onClick={handleMainLogin}>
-              Login 
+              Login
             </PrimaryButton>
-            <div className="workspace-action-container">
-              <button
-                type="button"
-                className="workspace-link-btn"
-                onClick={handleCreateWorkspace}
-                aria-label="Create New Workspace"
-              >
-                <span className="workspace-link-text">Create New Workspace</span>
-                <span className="workspace-link-arrow">→</span>
-              </button>
-            </div>
           </div>
+
           <Toast
             message={toastMessage}
             visible={toastVisible}
             onDismiss={() => setToastVisible(false)}
           />
         </div>
+
         <div className="mobile-home-indicator">
           <div className="home-bar" />
         </div>
-
       </div>
     </div>
   )
 }
+

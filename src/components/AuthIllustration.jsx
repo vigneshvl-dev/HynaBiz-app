@@ -93,10 +93,6 @@ export default function AuthIllustration() {
           </svg>
         </div>
 
-        <div className="floating-badge badge-bottom-center floating-delayed">
-          <span className="badge-sparkle">✨</span>
-          <span className="badge-growth-text">OS</span>
-        </div>
 
         {/* Connection Network Lines */}
         <svg className="scene-connection-lines" viewBox="0 0 340 180" fill="none">
