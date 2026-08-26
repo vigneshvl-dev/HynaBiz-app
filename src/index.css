@@ -330,9 +330,9 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: center;
-  opacity: 0;
-  transform: translateY(12px);
-  animation: revealUp 0.9s var(--ease-smooth) 0.85s forwards;
+  /* wrapper slides up into position; chars handle their own fade-in */
+  transform: translateY(10px);
+  animation: titleSlideUp 0.7s var(--ease-smooth) 0.8s forwards;
 }
 
 .app-title {
@@ -344,6 +344,23 @@ html, body {
   line-height: 1.1;
 }
 
+/* --- Per-character smooth writing animation --- */
+
+.char {
+  display: inline-block;
+  opacity: 0;
+  clip-path: inset(0 100% 0 0);
+  /* each char starts 0.1s after the previous; writing begins at 1.0s */
+  animation: charWrite 0.38s cubic-bezier(0.22, 0.61, 0.36, 1) calc(var(--i) * 0.1s + 1.0s) forwards;
+}
+
+.char-highlight {
+  background: linear-gradient(135deg, #0066ff 0%, #0052cc 60%, #0284c7 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* keep old class for any other uses */
 .text-highlight {
   background: linear-gradient(135deg, #0066ff 0%, #0052cc 60%, #0284c7 100%);
   -webkit-background-clip: text;
@@ -502,6 +519,26 @@ html, body {
   100% {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes titleSlideUp {
+  0%   { transform: translateY(10px); }
+  100% { transform: translateY(0); }
+}
+
+/* Smooth writing: each char sweeps in from left like a pen stroke */
+@keyframes charWrite {
+  0% {
+    opacity: 0;
+    clip-path: inset(0 100% 0 0);
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+    clip-path: inset(0 0% 0 0);
   }
 }
 
