@@ -5,23 +5,19 @@ import SocialLogin from '../components/SocialLogin'
 import Divider from '../components/Divider'
 import PrimaryButton from '../components/PrimaryButton'
 import Toast from '../components/Toast'
-
 export default function Login() {
   const navigate = useNavigate()
   const [toastMessage, setToastMessage] = useState('')
   const [toastVisible, setToastVisible] = useState(false)
   const [introStage, setIntroStage] = useState('active')
-
   const showToast = (message) => {
     setToastMessage(message)
     setToastVisible(true)
   }
-
   useEffect(() => {
     const leaveTimer = setTimeout(() => {
       setIntroStage('leaving')
     }, 2800)
-
     const doneTimer = setTimeout(() => {
       setIntroStage('done')
     }, 3550)
@@ -31,7 +27,6 @@ export default function Login() {
       clearTimeout(doneTimer)
     }
   }, [])
-
   useEffect(() => {
     if (toastVisible) {
       const timer = setTimeout(() => {
@@ -40,15 +35,12 @@ export default function Login() {
       return () => clearTimeout(timer)
     }
   }, [toastVisible])
-
   const handleMainLogin = () => {
     showToast('Login functionality will be connected soon.')
   }
-
   const handleSocialLogin = (message) => {
     showToast(message)
   }
-
   return (
     <div className="login-canvas-wrapper">
       <div className="canvas-ambient-glow glow-top" />
@@ -81,7 +73,7 @@ export default function Login() {
               <div className="intro-illustration-box">
                 <div className="orbital-ring ring-1" />
                 <div className="orbital-ring ring-2" />
-                
+
                 <div className="central-avatar pulse-avatar">
                   <svg viewBox="0 0 100 100" className="intro-avatar-svg" xmlns="http://www.w3.org/2000/svg">
                     <defs>
@@ -131,7 +123,6 @@ export default function Login() {
                   </h1>
                   <p className="auth-subtitle">Start your journey with</p>
                 </div>
-
                 <SocialLogin onSocialClick={handleSocialLogin} />
                 <Divider text="Or" />
                 <PrimaryButton onClick={handleMainLogin}>
@@ -140,14 +131,12 @@ export default function Login() {
               </div>
             </>
           )}
-
           <Toast
             message={toastMessage}
             visible={toastVisible}
             onDismiss={() => setToastVisible(false)}
           />
         </div>
-
         <div className="mobile-home-indicator">
           <div className="home-bar" />
         </div>

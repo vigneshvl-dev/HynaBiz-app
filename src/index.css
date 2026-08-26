@@ -1,12 +1,7 @@
-/* ==========================================================================
-   HynaBiz - Mobile-First Phone Screen Preview & Splash System
-   ========================================================================== */
-
 @import './styles/login.css';
 @import './styles/workspace.css';
 
 :root {
-  /* HYNABIZ Design System Variables */
   --hynabiz-blue: #0066ff;
   --hynabiz-blue-hover: #0052cc;
   --hynabiz-dark: #091124;
@@ -15,31 +10,24 @@
   --text-secondary: #64748b;
   --border-color: #e2e8f0;
   --white: #ffffff;
-
-  /* Color Palette & Accents */
   --bg-pure-white: #ffffff;
   --bg-studio: #f1f5f9;
-  
   --brand-blue: #0066ff;
   --brand-blue-deep: #0052cc;
   --brand-cyan: #00d2ff;
   --brand-glow: rgba(0, 102, 255, 0.16);
   --brand-glow-subtle: rgba(0, 210, 255, 0.12);
-  
   --text-headline: #091124;
   --text-muted: #64748b;
   --text-subtle: #94a3b8;
-  
-  /* Typography */
   --font-display: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  
-  /* Animation Timing */
   --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Reset & Box Sizing */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -47,7 +35,8 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-html, body {
+html,
+body {
   width: 100%;
   height: 100%;
   overflow: hidden;
@@ -72,10 +61,6 @@ html, body {
   justify-content: center;
 }
 
-/* ==========================================================================
-   Outer Device Wrapper (Centers phone on desktop)
-   ========================================================================== */
-
 .device-wrapper {
   width: 100%;
   height: 100vh;
@@ -88,10 +73,6 @@ html, body {
   overflow: hidden;
 }
 
-/* ==========================================================================
-   Mobile Phone Device Frame (iPhone 16 Pro Aesthetic)
-   ========================================================================== */
-
 .mobile-phone-frame {
   position: relative;
   width: 100%;
@@ -102,7 +83,7 @@ html, body {
   background: var(--bg-pure-white);
   border-radius: 48px;
   border: 10px solid #1e293b;
-  box-shadow: 
+  box-shadow:
     0 25px 60px -15px rgba(15, 23, 42, 0.25),
     0 0 0 1px rgba(255, 255, 255, 0.8),
     inset 0 0 0 2px rgba(0, 0, 0, 0.08);
@@ -112,10 +93,6 @@ html, body {
   overflow: hidden;
   will-change: transform;
 }
-
-/* ==========================================================================
-   Mobile Status Bar & Dynamic Island
-   ========================================================================== */
 
 .mobile-status-bar {
   position: relative;
@@ -371,9 +348,11 @@ html, body {
     opacity: 0;
     clip-path: inset(0 100% 0 0);
   }
+
   15% {
     opacity: 1;
   }
+
   100% {
     opacity: 1;
     clip-path: inset(0 0 0 0);
@@ -462,14 +441,20 @@ html, body {
    ========================================================================== */
 
 @keyframes ambientFadeIn {
-  0% { opacity: 0; }
-  100% { opacity: 1; }
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
 }
 
 @keyframes floatOrbTop {
   0% {
     transform: translateX(-50%) translateY(0) scale(1);
   }
+
   100% {
     transform: translateX(-50%) translateY(14px) scale(1.06);
   }
@@ -480,6 +465,7 @@ html, body {
     transform: translate(-50%, -50%) scale(0.95);
     opacity: 0.5;
   }
+
   100% {
     transform: translate(-50%, -50%) scale(1.08);
     opacity: 0.75;
@@ -491,6 +477,7 @@ html, body {
     opacity: 0;
     transform: scale(1.4) translateY(-10px);
   }
+
   100% {
     opacity: 1;
     transform: scale(1) translateY(0);
@@ -503,11 +490,13 @@ html, body {
     transform: scale(0.9);
     filter: blur(18px);
   }
+
   50% {
     opacity: 0.9;
     transform: scale(1.3);
     filter: blur(32px);
   }
+
   100% {
     opacity: 0.45;
     transform: scale(0.9);
@@ -520,10 +509,12 @@ html, body {
     transform: translateY(0) scale(0.94);
     filter: drop-shadow(0 8px 16px rgba(0, 102, 255, 0.18));
   }
+
   50% {
     transform: translateY(-6px) scale(1.08);
     filter: drop-shadow(0 18px 36px rgba(0, 102, 255, 0.32));
   }
+
   100% {
     transform: translateY(0) scale(0.94);
     filter: drop-shadow(0 8px 16px rgba(0, 102, 255, 0.18));
@@ -535,6 +526,7 @@ html, body {
     opacity: 0;
     transform: translateY(12px);
   }
+
   100% {
     opacity: 1;
     transform: translateY(0);
@@ -542,8 +534,13 @@ html, body {
 }
 
 @keyframes titleSlideUp {
-  0%   { transform: translateY(10px); }
-  100% { transform: translateY(0); }
+  0% {
+    transform: translateY(10px);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
 }
 
 /* Smooth writing: each char sweeps in from left like a pen stroke */
@@ -552,9 +549,11 @@ html, body {
     opacity: 0;
     clip-path: inset(0 100% 0 0);
   }
+
   20% {
     opacity: 1;
   }
+
   100% {
     opacity: 1;
     clip-path: inset(0 0% 0 0);
@@ -567,9 +566,11 @@ html, body {
     opacity: 0;
     clip-path: inset(0 100% 0 0);
   }
+
   8% {
     opacity: 1;
   }
+
   100% {
     opacity: 1;
     clip-path: inset(0 0% 0 0);
@@ -578,14 +579,24 @@ html, body {
 
 /* Pen cursor appears just before writing */
 @keyframes cursorAppear {
-  0%   { opacity: 0; }
-  100% { opacity: 1; }
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
 }
 
 /* Pen cursor fades after writing completes */
 @keyframes cursorFade {
-  0%   { opacity: 1; }
-  100% { opacity: 0; }
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
 }
 
 /* ==========================================================================

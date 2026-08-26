@@ -1,7 +1,3 @@
-/* ==========================================================================
-   HYNABIZ - Login & Welcome Screen Styles
-   ========================================================================== */
-
 .login-canvas-wrapper {
   position: relative;
   width: 100%;
@@ -15,7 +11,6 @@
   overflow: hidden;
 }
 
-/* Ambient canvas background orbs */
 .canvas-ambient-glow {
   position: absolute;
   border-radius: 50%;
@@ -42,7 +37,6 @@
   animation: pulseCenter 8s ease-in-out infinite alternate;
 }
 
-/* --- Centered Mobile-Style Phone Device Card --- */
 .auth-phone-card {
   position: relative;
   z-index: 10;
@@ -54,7 +48,7 @@
   background: #f8fafc;
   border-radius: 44px;
   border: 9px solid #1e293b;
-  box-shadow: 
+  box-shadow:
     0 30px 70px -15px rgba(0, 15, 50, 0.6),
     0 0 0 1px rgba(255, 255, 255, 0.2),
     inset 0 0 0 1px rgba(0, 0, 0, 0.1);
@@ -69,7 +63,6 @@
   color: #0f172a;
 }
 
-/* --- Auth Viewport Container --- */
 .auth-viewport {
   position: relative;
   flex: 1;
@@ -87,7 +80,6 @@
   display: none;
 }
 
-/* --- Top Section: Light Blue Illustration Area --- */
 .auth-top-illustration-section {
   position: relative;
   width: 100%;
@@ -266,7 +258,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 
+  box-shadow:
     0 12px 28px rgba(0, 102, 255, 0.24),
     0 2px 6px rgba(0, 0, 0, 0.05),
     inset 0 0 0 1.5px rgba(255, 255, 255, 0.9);
@@ -370,27 +362,49 @@
 }
 
 @keyframes floatAnimation {
-  0% { transform: translateY(0px); }
-  100% { transform: translateY(-6px); }
+  0% {
+    transform: translateY(0px);
+  }
+
+  100% {
+    transform: translateY(-6px);
+  }
 }
 
 @keyframes pulseBadge {
-  0% { transform: scale(0.97); }
-  100% { transform: scale(1.03); }
+  0% {
+    transform: scale(0.97);
+  }
+
+  100% {
+    transform: scale(1.03);
+  }
 }
 
 @keyframes hubRotate {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes hubRotateReverse {
-  0% { transform: rotate(360deg); }
-  100% { transform: rotate(0deg); }
+  0% {
+    transform: rotate(360deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
 }
 
 @keyframes dashAnimation {
-  to { stroke-dashoffset: -100; }
+  to {
+    stroke-dashoffset: -100;
+  }
 }
 
 /* ==========================================================================
@@ -418,6 +432,7 @@
     opacity: 0;
     transform: translateY(80px) scale(0.96);
   }
+
   100% {
     opacity: 1;
     transform: translateY(0) scale(1);
@@ -483,6 +498,7 @@
     opacity: 0;
     transform: translateY(18px);
   }
+
   100% {
     opacity: 1;
     transform: translateY(0);
@@ -494,6 +510,7 @@
     opacity: 0;
     transform: translateY(14px);
   }
+
   100% {
     opacity: 1;
     transform: translateY(0);
@@ -501,8 +518,13 @@
 }
 
 @keyframes gradientShimmer {
-  0%   { background-position: 0% center; }
-  100% { background-position: 200% center; }
+  0% {
+    background-position: 0% center;
+  }
+
+  100% {
+    background-position: 200% center;
+  }
 }
 
 /* --- Social Login Row --- */
@@ -717,6 +739,7 @@
     opacity: 0;
     transform: translate(-50%, 15px) scale(0.96);
   }
+
   100% {
     opacity: 1;
     transform: translate(-50%, 0) scale(1);
@@ -810,7 +833,7 @@
   border-radius: 50%;
   background: #ffffff;
   padding: 4px;
-  box-shadow: 
+  box-shadow:
     0 12px 32px rgba(0, 102, 255, 0.22),
     0 2px 6px rgba(0, 0, 0, 0.05);
   display: flex;
@@ -833,7 +856,7 @@
   background: #ffffff;
   border-radius: 50%;
   padding: 2px;
-  box-shadow: 
+  box-shadow:
     0 8px 16px rgba(0, 0, 0, 0.08),
     0 2px 4px rgba(0, 0, 0, 0.04);
   border: 2px solid #ffffff;
@@ -892,6 +915,7 @@
     transform: scale(1);
     filter: blur(0px);
   }
+
   100% {
     opacity: 0;
     transform: scale(0.96);
@@ -903,6 +927,7 @@
   0% {
     transform: translate(0, 0) scale(1);
   }
+
   100% {
     transform: translate(-5px, -7px) scale(1.04);
   }
@@ -912,6 +937,7 @@
   0% {
     transform: translate(0, 0) scale(1);
   }
+
   100% {
     transform: translate(5px, 7px) scale(1.04);
   }
@@ -922,9 +948,9 @@
     opacity: 0;
     transform: translateY(22px);
   }
+
   100% {
     opacity: 1;
     transform: translateY(0);
   }
 }
-
