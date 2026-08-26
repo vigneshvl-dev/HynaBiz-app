@@ -64,19 +64,11 @@ export default function Login() {
               <h1 className="auth-title">Welcome to HYNABIZ</h1>
               <p className="auth-subtitle">Start your journey with</p>
             </div>
-
-            {/* Circular Social Login Row (Google, Email, GitHub, Apple) */}
             <SocialLogin onSocialClick={handleSocialLogin} />
-
-            {/* Divider */}
             <Divider text="Or" />
-
-            {/* Main Login Primary Button */}
             <PrimaryButton onClick={handleMainLogin}>
               Login 
             </PrimaryButton>
-
-            {/* Workspace Creation Link */}
             <div className="workspace-action-container">
               <button
                 type="button"
@@ -88,17 +80,13 @@ export default function Login() {
                 <span className="workspace-link-arrow">→</span>
               </button>
             </div>
-
           </div>
-
-          {/* Toast Notification Container inside or overlay */}
           <Toast
             message={toastMessage}
             visible={toastVisible}
             onDismiss={() => setToastVisible(false)}
           />
         </div>
-        {/* Mobile Home Indicator */}
         <div className="mobile-home-indicator">
           <div className="home-bar" />
         </div>
