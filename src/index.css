@@ -381,7 +381,7 @@ html, body {
 .powered-by-label {
   font-family: var(--font-display);
   font-size: 0.58rem;
-  font-weight: 700;
+  font-weight: 500;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: #94a3b8;
@@ -390,8 +390,8 @@ html, body {
 .powered-by-brand {
   font-family: var(--font-display);
   font-size: 0.92rem;
-  font-weight: 800;
-  letter-spacing: -0.01em;
+  font-weight: 500;
+  letter-spacing: 0.01em;
   color: #0f172a;
 }
 
