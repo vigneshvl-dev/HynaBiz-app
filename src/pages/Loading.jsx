@@ -1,29 +1,38 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import SplashScreen from '../components/SplashScreen'
+import '../styles/page-transition.css'
 
 export default function Loading() {
   const navigate = useNavigate()
+  const [stage, setStage] = useState('entering')
 
   useEffect(() => {
-    // Navigate slightly before the fade-out completes (2.8s delay + 0.9s = 3.7s)
-    // so login is already mounted when splash becomes invisible
-    const timer = setTimeout(() => {
-      navigate('/login')
-    }, 3500)
+    // Fade in
+    const enterRaf = requestAnimationFrame(() => setStage('visible'))
 
-    return () => clearTimeout(timer)
+    // After splash display time, animate out then navigate to login
+    const leaveTimer = setTimeout(() => setStage('leaving'), 2800)
+    const navTimer = setTimeout(() => navigate('/login'), 3180)
+
+    return () => {
+      cancelAnimationFrame(enterRaf)
+      clearTimeout(leaveTimer)
+      clearTimeout(navTimer)
+    }
   }, [navigate])
 
   const handleClick = () => {
-    navigate('/login')
+    setStage('leaving')
+    setTimeout(() => navigate('/login'), 350)
   }
 
   return (
-    <div 
-      onClick={handleClick} 
-      style={{ width: '100%', height: '100%', cursor: 'pointer' }}
-      title="Tap to skip to login"
+    <div
+      className={`page-transition page-transition--${stage}`}
+      onClick={handleClick}
+      style={{ cursor: 'pointer' }}
+      title="Tap to skip"
     >
       <SplashScreen />
     </div>
