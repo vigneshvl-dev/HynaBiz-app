@@ -1,35 +1,28 @@
 /* ==========================================================================
-   HynaBiz - Premium Mobile-First Splash Screen Styles
-   Design Language: Deep Sapphire Dark Theme with Ambient Glow & Ethereal Blue
+   HynaBiz - Mobile-First Phone Screen Preview & Splash System
    ========================================================================== */
 
 :root {
   /* Color Palette */
-  --bg-dark-0: #040711;
-  --bg-dark-1: #070d1e;
-  --bg-dark-2: #0b152e;
+  --bg-pure-white: #ffffff;
+  --bg-studio: #f1f5f9;
   
   --brand-blue: #0066ff;
-  --brand-blue-glow: rgba(0, 102, 255, 0.45);
+  --brand-blue-deep: #0052cc;
   --brand-cyan: #00d2ff;
-  --brand-cyan-glow: rgba(0, 210, 255, 0.3);
-  --brand-royal: #2563eb;
+  --brand-glow: rgba(0, 102, 255, 0.16);
+  --brand-glow-subtle: rgba(0, 210, 255, 0.12);
   
-  --text-pure: #ffffff;
-  --text-bright: #f1f5f9;
-  --text-muted: #94a3b8;
-  --text-dim: #64748b;
-  
-  --border-subtle: rgba(255, 255, 255, 0.08);
-  --border-glow: rgba(0, 150, 255, 0.25);
+  --text-headline: #091124;
+  --text-muted: #64748b;
+  --text-subtle: #94a3b8;
   
   /* Typography */
   --font-display: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   
-  /* Animation Timing & Curves */
+  /* Animation Timing */
   --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-bounce-soft: cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 /* Reset & Box Sizing */
@@ -45,9 +38,9 @@ html, body {
   width: 100%;
   height: 100%;
   overflow: hidden;
-  background-color: var(--bg-dark-0);
+  background-color: var(--bg-studio);
   font-family: var(--font-body);
-  color: var(--text-bright);
+  color: var(--text-headline);
   user-select: none;
   -webkit-user-select: none;
   -webkit-tap-highlight-color: transparent;
@@ -67,26 +60,156 @@ html, body {
 }
 
 /* ==========================================================================
-   Viewport & Master Layout
+   Outer Device Wrapper (Centers phone on desktop)
    ========================================================================== */
 
-.splash-viewport {
-  position: relative;
+.device-wrapper {
   width: 100%;
-  min-height: 100vh;
-  min-height: 100dvh;
+  height: 100vh;
+  height: 100dvh;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  padding: env(safe-area-inset-top, 24px) 24px env(safe-area-inset-bottom, 24px) 24px;
-  background: radial-gradient(circle at 50% 20%, var(--bg-dark-1) 0%, var(--bg-dark-0) 100%);
+  justify-content: center;
+  background: radial-gradient(circle at 50% 50%, #f8fafc 0%, #e2e8f0 100%);
+  padding: 16px;
   overflow: hidden;
 }
 
 /* ==========================================================================
-   Ambient Background Lighting & Mesh
+   Mobile Phone Device Frame (iPhone 16 Pro Aesthetic)
    ========================================================================== */
+
+.mobile-phone-frame {
+  position: relative;
+  width: 100%;
+  max-width: 390px;
+  height: 844px;
+  max-height: calc(100vh - 32px);
+  max-height: calc(100dvh - 32px);
+  background: var(--bg-pure-white);
+  border-radius: 48px;
+  border: 10px solid #1e293b;
+  box-shadow: 
+    0 25px 60px -15px rgba(15, 23, 42, 0.25),
+    0 0 0 1px rgba(255, 255, 255, 0.8),
+    inset 0 0 0 2px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  will-change: transform;
+}
+
+/* ==========================================================================
+   Mobile Status Bar & Dynamic Island
+   ========================================================================== */
+
+.mobile-status-bar {
+  position: relative;
+  z-index: 20;
+  width: 100%;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  padding-top: 6px;
+  color: #0f172a;
+  font-size: 0.88rem;
+  font-weight: 600;
+  font-family: -apple-system, BlinkMacSystemFont, var(--font-body);
+}
+
+.status-time {
+  letter-spacing: -0.02em;
+}
+
+.dynamic-island {
+  position: absolute;
+  left: 50%;
+  top: 10px;
+  transform: translateX(-50%);
+  width: 104px;
+  height: 28px;
+  background: #000000;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.island-camera {
+  width: 9px;
+  height: 9px;
+  background: #111827;
+  border-radius: 50%;
+  border: 1.5px solid #1f2937;
+  box-shadow: inset 0 0 2px #0066ff;
+}
+
+.status-icons {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.icon-cellular {
+  width: 15px;
+  height: 10px;
+}
+
+.icon-wifi {
+  width: 14px;
+  height: 11px;
+}
+
+.battery-icon {
+  width: 22px;
+  height: 11px;
+  border: 1.5px solid #0f172a;
+  border-radius: 3.5px;
+  padding: 1.5px;
+  position: relative;
+}
+
+.battery-icon::after {
+  content: '';
+  position: absolute;
+  right: -3.5px;
+  top: 2.5px;
+  width: 2px;
+  height: 4px;
+  background: #0f172a;
+  border-radius: 0 1px 1px 0;
+}
+
+.battery-fill {
+  width: 100%;
+  height: 100%;
+  background: #0f172a;
+  border-radius: 1px;
+}
+
+/* ==========================================================================
+   Splash Screen Viewport Inside Phone
+   ========================================================================== */
+
+.splash-viewport {
+  position: relative;
+  flex: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--bg-pure-white);
+  overflow: hidden;
+  padding: 16px 20px 8px 20px;
+}
+
+/* --- Ambient Background Lighting --- */
 
 .ambient-background {
   position: absolute;
@@ -95,7 +218,7 @@ html, body {
   z-index: 1;
   overflow: hidden;
   opacity: 0;
-  animation: ambientFadeIn 1.8s var(--ease-smooth) 0.2s forwards;
+  animation: ambientFadeIn 1.6s var(--ease-smooth) 0.1s forwards;
 }
 
 .ambient-glow {
@@ -111,45 +234,33 @@ html, body {
   transform: translateX(-50%);
   width: 320px;
   height: 320px;
-  background: radial-gradient(circle, var(--brand-blue-glow) 0%, rgba(0, 102, 255, 0) 70%);
-  opacity: 0.6;
+  background: radial-gradient(circle, var(--brand-glow) 0%, rgba(0, 102, 255, 0) 70%);
+  opacity: 0.7;
   animation: floatOrbTop 8s ease-in-out infinite alternate;
 }
 
 .ambient-glow-center {
-  top: 42%;
+  top: 45%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 280px;
   height: 280px;
-  background: radial-gradient(circle, var(--brand-cyan-glow) 0%, rgba(0, 210, 255, 0) 70%);
-  opacity: 0.45;
+  background: radial-gradient(circle, var(--brand-glow-subtle) 0%, rgba(0, 210, 255, 0) 70%);
+  opacity: 0.6;
   animation: pulseCenter 6s ease-in-out infinite alternate;
 }
 
 .ambient-glow-bottom {
-  bottom: -5%;
-  right: 15%;
-  width: 260px;
-  height: 260px;
-  background: radial-gradient(circle, rgba(37, 99, 235, 0.25) 0%, transparent 70%);
-  opacity: 0.35;
+  bottom: -10%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(0, 102, 255, 0.08) 0%, transparent 70%);
+  opacity: 0.5;
 }
 
-.ambient-grid-overlay {
-  position: absolute;
-  inset: 0;
-  background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-  background-size: 32px 32px;
-  mask-image: radial-gradient(circle at 50% 45%, black 20%, transparent 80%);
-  -webkit-mask-image: radial-gradient(circle at 50% 45%, black 20%, transparent 80%);
-}
-
-/* ==========================================================================
-   Center Splash Card & Brand Identity
-   ========================================================================== */
+/* --- Center Splash Card --- */
 
 .splash-card {
   position: relative;
@@ -160,66 +271,44 @@ html, body {
   justify-content: center;
   text-align: center;
   width: 100%;
-  max-width: 380px;
+  max-width: 320px;
   margin: auto 0;
-  padding: 20px 0;
 }
 
-/* --- Logo Wrapper & Floating Breathing Animation --- */
+/* --- Logo Wrapper & Floating Animation --- */
 
 .logo-wrapper {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 28px;
+  margin-bottom: 24px;
   opacity: 0;
   transform: scale(0.85);
-  animation: logoEntrance 1.1s var(--ease-smooth) 0.35s forwards;
+  animation: logoEntrance 1.1s var(--ease-smooth) 0.25s forwards;
 }
 
 .logo-backlight-pulse {
   position: absolute;
-  width: 140px;
-  height: 140px;
+  width: 150px;
+  height: 150px;
   border-radius: 50%;
-  background: radial-gradient(circle, var(--brand-blue) 0%, var(--brand-cyan) 60%, transparent 75%);
-  filter: blur(28px);
-  opacity: 0.55;
+  background: radial-gradient(circle, rgba(0, 102, 255, 0.22) 0%, rgba(0, 210, 255, 0.1) 50%, transparent 75%);
+  filter: blur(24px);
+  opacity: 0.7;
   z-index: 1;
   animation: backlightPulse 4s ease-in-out infinite alternate;
-}
-
-.logo-outer-ring {
-  position: absolute;
-  width: 132px;
-  height: 132px;
-  border-radius: 36px;
-  border: 1px solid var(--border-glow);
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(0, 102, 255, 0.04));
-  box-shadow: 0 8px 32px 0 rgba(0, 50, 150, 0.25);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  z-index: 2;
-  transition: all 0.4s ease;
 }
 
 .logo-container {
   position: relative;
   z-index: 3;
-  width: 114px;
-  height: 114px;
-  border-radius: 28px;
-  background: #ffffff;
+  width: 124px;
+  height: 124px;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 10px;
-  box-shadow: 
-    0 12px 36px -6px rgba(0, 102, 255, 0.35),
-    0 4px 12px 0 rgba(0, 0, 0, 0.4),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.9);
-  animation: subtleFloat 4.5s ease-in-out 1.45s infinite alternate;
+  animation: subtleFloat 4.5s ease-in-out 1.35s infinite alternate;
 }
 
 .brand-logo {
@@ -227,7 +316,7 @@ html, body {
   height: 100%;
   object-fit: contain;
   display: block;
-  filter: drop-shadow(0 2px 8px rgba(0, 80, 200, 0.15));
+  filter: drop-shadow(0 12px 24px rgba(0, 102, 255, 0.2));
 }
 
 /* --- Brand Identity Typography --- */
@@ -237,17 +326,15 @@ html, body {
   flex-direction: column;
   align-items: center;
   gap: 8px;
-  margin-bottom: 36px;
 }
 
 .app-title-wrapper {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
   opacity: 0;
   transform: translateY(12px);
-  animation: revealUp 0.9s var(--ease-smooth) 0.95s forwards;
+  animation: revealUp 0.9s var(--ease-smooth) 0.85s forwards;
 }
 
 .app-title {
@@ -255,29 +342,14 @@ html, body {
   font-size: 2.25rem;
   font-weight: 800;
   letter-spacing: -0.03em;
-  color: var(--text-pure);
+  color: var(--text-headline);
   line-height: 1.1;
-  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
 }
 
 .text-highlight {
-  background: linear-gradient(135deg, #38bdf8 0%, #3b82f6 50%, #60a5fa 100%);
+  background: linear-gradient(135deg, #0066ff 0%, #0052cc 60%, #0284c7 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-}
-
-.app-badge {
-  font-family: var(--font-display);
-  font-size: 0.65rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: #38bdf8;
-  background: rgba(56, 189, 248, 0.12);
-  border: 1px solid rgba(56, 189, 248, 0.28);
-  padding: 3px 7px;
-  border-radius: 6px;
-  vertical-align: middle;
 }
 
 .app-tagline {
@@ -288,119 +360,67 @@ html, body {
   letter-spacing: 0.01em;
   opacity: 0;
   transform: translateY(10px);
-  animation: revealUp 0.9s var(--ease-smooth) 1.2s forwards;
+  animation: revealUp 0.9s var(--ease-smooth) 1.05s forwards;
 }
 
-/* --- Sleek Minimal Loading Indicator --- */
+/* --- Powered by HynaStudio Footer --- */
 
-.loader-section {
-  width: 100%;
-  max-width: 260px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-  opacity: 0;
-  transform: translateY(10px);
-  animation: revealUp 0.9s var(--ease-smooth) 1.45s forwards;
-}
-
-.progress-track {
-  width: 100%;
-  height: 4px;
-  background: rgba(255, 255, 255, 0.07);
-  border-radius: 999px;
-  overflow: hidden;
-  position: relative;
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.3);
-}
-
-.progress-bar {
-  height: 100%;
-  background: linear-gradient(90deg, #0066ff, #00d2ff);
-  border-radius: 999px;
-  position: relative;
-  transition: width 0.15s ease-out;
-  box-shadow: 0 0 12px rgba(0, 210, 255, 0.7);
-}
-
-.progress-glow-tip {
-  position: absolute;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 6px;
-  height: 6px;
-  background: #ffffff;
-  border-radius: 50%;
-  box-shadow: 0 0 8px 2px #00d2ff;
-}
-
-.status-container {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 0.75rem;
-  color: var(--text-dim);
-  font-weight: 500;
-}
-
-.status-text {
-  transition: color 0.3s ease;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.progress-number {
-  font-family: var(--font-display);
-  font-variant-numeric: tabular-nums;
-  font-weight: 600;
-  color: #38bdf8;
-  margin-left: 8px;
-}
-
-/* ==========================================================================
-   Footer Info & Security Badge
-   ========================================================================== */
-
-.splash-footer {
+.powered-by-section {
   position: relative;
   z-index: 10;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
+  gap: 3px;
+  padding-bottom: 4px;
   opacity: 0;
-  animation: revealUp 1s var(--ease-smooth) 1.7s forwards;
-  padding-bottom: 8px;
+  transform: translateY(8px);
+  animation: revealUp 0.9s var(--ease-smooth) 1.25s forwards;
 }
 
-.security-indicator {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 0.72rem;
-  font-weight: 500;
-  color: var(--text-dim);
-  letter-spacing: 0.02em;
-}
-
-.security-dot {
-  width: 6px;
-  height: 6px;
-  background-color: #10b981;
-  border-radius: 50%;
-  box-shadow: 0 0 8px rgba(16, 185, 129, 0.7);
-  animation: blinkDot 2.5s infinite ease-in-out;
-}
-
-.version-tag {
-  font-size: 0.68rem;
-  color: rgba(255, 255, 255, 0.25);
+.powered-by-label {
   font-family: var(--font-display);
-  letter-spacing: 0.03em;
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #94a3b8;
+}
+
+.powered-by-brand {
+  font-family: var(--font-display);
+  font-size: 0.92rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: #0f172a;
+}
+
+.powered-by-accent {
+  color: #0066ff;
+}
+
+/* ==========================================================================
+   Mobile Home Indicator (Bottom Bar)
+   ========================================================================== */
+
+.mobile-home-indicator {
+  position: relative;
+  z-index: 20;
+  width: 100%;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 4px;
+  background: transparent;
+}
+
+.home-bar {
+  width: 134px;
+  height: 5px;
+  background: #0f172a;
+  border-radius: 999px;
+  opacity: 0.85;
 }
 
 /* ==========================================================================
@@ -417,25 +437,25 @@ html, body {
     transform: translateX(-50%) translateY(0) scale(1);
   }
   100% {
-    transform: translateX(-50%) translateY(18px) scale(1.08);
+    transform: translateX(-50%) translateY(14px) scale(1.06);
   }
 }
 
 @keyframes pulseCenter {
   0% {
     transform: translate(-50%, -50%) scale(0.95);
-    opacity: 0.35;
+    opacity: 0.5;
   }
   100% {
-    transform: translate(-50%, -50%) scale(1.1);
-    opacity: 0.55;
+    transform: translate(-50%, -50%) scale(1.08);
+    opacity: 0.75;
   }
 }
 
 @keyframes logoEntrance {
   0% {
     opacity: 0;
-    transform: scale(0.85) translateY(10px);
+    transform: scale(0.85) translateY(8px);
   }
   100% {
     opacity: 1;
@@ -445,14 +465,14 @@ html, body {
 
 @keyframes backlightPulse {
   0% {
-    opacity: 0.45;
+    opacity: 0.5;
     transform: scale(0.95);
-    filter: blur(24px);
+    filter: blur(20px);
   }
   100% {
-    opacity: 0.75;
+    opacity: 0.85;
     transform: scale(1.15);
-    filter: blur(34px);
+    filter: blur(30px);
   }
 }
 
@@ -479,51 +499,36 @@ html, body {
   }
 }
 
-@keyframes blinkDot {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.4; transform: scale(0.85); }
-}
-
 /* ==========================================================================
-   Responsive Adaptations (Tablet & Desktop)
+   Responsive Adaptations: Actual Mobile Devices (Full-bleed)
    ========================================================================== */
 
-@media (min-width: 640px) {
-  .splash-card {
-    max-width: 440px;
+@media (max-width: 480px) {
+  .device-wrapper {
+    padding: 0;
+    background: var(--bg-pure-white);
   }
 
-  .logo-wrapper {
-    margin-bottom: 32px;
+  .mobile-phone-frame {
+    max-width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    max-height: 100vh;
+    max-height: 100dvh;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
   }
 
-  .logo-container {
-    width: 126px;
-    height: 126px;
-    border-radius: 32px;
-    padding: 12px;
+  .dynamic-island {
+    display: none;
   }
 
-  .logo-outer-ring {
-    width: 146px;
-    height: 146px;
-    border-radius: 40px;
+  .mobile-status-bar {
+    display: none;
   }
 
-  .logo-backlight-pulse {
-    width: 160px;
-    height: 160px;
-  }
-
-  .app-title {
-    font-size: 2.6rem;
-  }
-
-  .app-tagline {
-    font-size: 1.05rem;
-  }
-
-  .loader-section {
-    max-width: 290px;
+  .mobile-home-indicator {
+    padding-bottom: env(safe-area-inset-bottom, 8px);
   }
 }

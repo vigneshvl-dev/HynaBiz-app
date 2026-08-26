@@ -1,108 +1,91 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import logoImg from '../assets/logo.png'
 
 export default function SplashScreen() {
-  const [loadingProgress, setLoadingProgress] = useState(0)
-  const [statusIndex, setStatusIndex] = useState(0)
-
-  const statusMessages = [
-    'Initializing secure workspace...',
-    'Syncing intelligent engine...',
-    'Preparing your enterprise dashboard...',
-    'Ready.'
-  ]
-
-  useEffect(() => {
-    // Smooth, realistic loading progress simulation
-    const interval = setInterval(() => {
-      setLoadingProgress((prev) => {
-        if (prev >= 100) {
-          clearInterval(interval)
-          return 100
-        }
-        // Organic progress curve
-        const increment = Math.floor(Math.random() * 7) + 3
-        const nextVal = Math.min(100, prev + increment)
-        
-        if (nextVal > 75) setStatusIndex(3)
-        else if (nextVal > 45) setStatusIndex(2)
-        else if (nextVal > 15) setStatusIndex(1)
-        
-        return nextVal
-      })
-    }, 110)
-
-    return () => clearInterval(interval)
-  }, [])
-
   return (
-    <div className="splash-viewport">
-      {/* Background ambient lighting effects */}
-      <div className="ambient-background">
-        <div className="ambient-glow ambient-glow-top" />
-        <div className="ambient-glow ambient-glow-center" />
-        <div className="ambient-glow ambient-glow-bottom" />
-        <div className="ambient-grid-overlay" />
-      </div>
-
-      {/* Main App Splash Content */}
-      <div className="splash-card">
+    <div className="device-wrapper">
+      {/* Mobile Device Frame Container */}
+      <div className="mobile-phone-frame">
         
-        {/* Logo Container with Layered Backlight & Breathing Motion */}
-        <div className="logo-wrapper">
-          <div className="logo-backlight-pulse" />
-          <div className="logo-outer-ring" />
-          
-          <div className="logo-container">
-            <img
-              src={logoImg}
-              alt="HynaBiz Logo"
-              className="brand-logo"
-              loading="eager"
-            />
+        {/* Mobile Status Bar (9:41, Dynamic Island, Network, Battery) */}
+        <div className="mobile-status-bar">
+          <span className="status-time">9:41</span>
+          <div className="dynamic-island">
+            <span className="island-camera" />
           </div>
-        </div>
-
-        {/* Brand Identity: App Name & Tagline */}
-        <div className="brand-identity">
-          <div className="app-title-wrapper">
-            <h1 className="app-title">
-              Hyna<span className="text-highlight">Biz</span>
-            </h1>
-            <span className="app-badge">OS</span>
-          </div>
-
-          <p className="app-tagline">
-            Smart Business Operating System
-          </p>
-        </div>
-
-        {/* Subtle, Minimal Loading Indicator */}
-        <div className="loader-section">
-          <div className="progress-track">
-            <div
-              className="progress-bar"
-              style={{ width: `${loadingProgress}%` }}
-            >
-              <div className="progress-glow-tip" />
+          <div className="status-icons">
+            {/* Cellular */}
+            <svg className="icon-cellular" viewBox="0 0 18 12" fill="currentColor">
+              <rect x="0" y="8" width="3" height="4" rx="0.5" />
+              <rect x="5" y="5" width="3" height="7" rx="0.5" />
+              <rect x="10" y="2.5" width="3" height="9.5" rx="0.5" />
+              <rect x="15" y="0" width="3" height="12" rx="0.5" />
+            </svg>
+            {/* Wifi */}
+            <svg className="icon-wifi" viewBox="0 0 16 12" fill="currentColor">
+              <path d="M8 9.5a1.5 1.5 0 100 3 1.5 1.5 0 000-3zM2.05 3.55a8.42 8.42 0 0111.9 0l-1.06 1.06a6.92 6.92 0 00-9.78 0L2.05 3.55zM4.17 5.67a5.42 5.42 0 017.66 0l-1.06 1.06a3.92 3.92 0 00-5.54 0L4.17 5.67z" />
+            </svg>
+            {/* Battery */}
+            <div className="battery-icon">
+              <div className="battery-fill" />
             </div>
           </div>
+        </div>
 
-          <div className="status-container">
-            <span className="status-text">{statusMessages[statusIndex]}</span>
-            <span className="progress-number">{loadingProgress}%</span>
+        {/* Main Splash Viewport */}
+        <div className="splash-viewport">
+          
+          {/* Background Ambient Lighting */}
+          <div className="ambient-background">
+            <div className="ambient-glow ambient-glow-top" />
+            <div className="ambient-glow ambient-glow-center" />
+            <div className="ambient-glow ambient-glow-bottom" />
           </div>
+
+          {/* Center App Splash Content */}
+          <div className="splash-card">
+            
+            {/* Logo with Ambient Backlight Halo & Floating Breathing Motion */}
+            <div className="logo-wrapper">
+              <div className="logo-backlight-pulse" />
+              <div className="logo-container">
+                <img
+                  src={logoImg}
+                  alt="HynaBiz Logo"
+                  className="brand-logo"
+                  loading="eager"
+                />
+              </div>
+            </div>
+
+            {/* Brand Identity: App Name & Tagline */}
+            <div className="brand-identity">
+              <div className="app-title-wrapper">
+                <h1 className="app-title">
+                  Hyna<span className="text-highlight">Biz</span>
+                </h1>
+              </div>
+
+              <p className="app-tagline">
+                Smart Business Operating System
+              </p>
+            </div>
+
+          </div>
+
+          {/* Powered by HynaStudio Footer */}
+          <div className="powered-by-section">
+            <span className="powered-by-label">POWERED BY</span>
+            <span className="powered-by-brand">Hyna<span className="powered-by-accent">Studio</span></span>
+          </div>
+
         </div>
 
-      </div>
-
-      {/* App Version & Security Note at Bottom */}
-      <div className="splash-footer">
-        <div className="security-indicator">
-          <span className="security-dot" />
-          <span>Enterprise Encryption Active</span>
+        {/* iOS Home Indicator Bar */}
+        <div className="mobile-home-indicator">
+          <div className="home-bar" />
         </div>
-        <span className="version-tag">v2.4.0 (Build 829)</span>
+
       </div>
     </div>
   )
