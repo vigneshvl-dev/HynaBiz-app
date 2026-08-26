@@ -56,14 +56,8 @@ export default function SplashScreen() {
             {/* Brand Identity: App Name & Tagline */}
             <div className="brand-identity">
               <div className="app-title-wrapper">
-                <h1 className="app-title">
-                  <span className="char" style={{ "--i": 0 }}>H</span>
-                  <span className="char" style={{ "--i": 1 }}>y</span>
-                  <span className="char" style={{ "--i": 2 }}>n</span>
-                  <span className="char" style={{ "--i": 3 }}>a</span>
-                  <span className="char char-highlight" style={{ "--i": 4 }}>B</span>
-                  <span className="char char-highlight" style={{ "--i": 5 }}>i</span>
-                  <span className="char char-highlight" style={{ "--i": 6 }}>z</span>
+                <h1 className="app-title brand-title">
+                  <span className="brand-hyna">Hyna</span><span className="brand-biz">Biz</span>
                 </h1>
               </div>
             </div>

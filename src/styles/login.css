@@ -446,16 +446,25 @@
 }
 
 .auth-title-gradient {
-  background: linear-gradient(135deg, #0066ff 0%, #00b4ff 50%, #0066ff 100%);
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
   animation:
-    authTitleEntrance 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards,
-    gradientShimmer 3s linear 0.8s infinite;
+    authTitleEntrance 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards;
   display: inline-block;
   opacity: 0;
+}
+
+/* Two-colour brand name helpers (used inside spans) */
+.brand-hyna-inline {
+  color: #0a0f1e;
+  -webkit-text-fill-color: #0a0f1e;
+}
+
+.brand-biz-inline {
+  color: #0066ff;
+  -webkit-text-fill-color: #0066ff;
 }
 
 .auth-subtitle {
@@ -742,3 +751,180 @@
     padding: 22px 20px calc(20px + env(safe-area-inset-bottom, 8px)) 20px;
   }
 }
+
+/* ==========================================================================
+   Welcome Intro Animation Sequence Styles
+   ========================================================================== */
+.login-intro-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  min-height: 580px;
+  background: linear-gradient(180deg, #e6f1fe 0%, #edf5ff 50%, #ffffff 100%);
+  padding: 24px;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.login-intro-container.stage-leaving {
+  animation: introFadeOut 0.7s cubic-bezier(0.64, 0, 0.78, 0) forwards;
+}
+
+.intro-illustration-box {
+  position: relative;
+  width: 220px;
+  height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 35px;
+}
+
+.orbital-ring {
+  position: absolute;
+  border: 1.5px dashed rgba(0, 102, 255, 0.15);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.orbital-ring.ring-1 {
+  width: 130px;
+  height: 130px;
+  animation: orbitRotate 16s linear infinite;
+}
+
+.orbital-ring.ring-2 {
+  width: 190px;
+  height: 190px;
+  animation: orbitRotateReverse 24s linear infinite;
+}
+
+.central-avatar {
+  position: relative;
+  z-index: 3;
+  width: 82px;
+  height: 82px;
+  border-radius: 50%;
+  background: #ffffff;
+  padding: 4px;
+  box-shadow: 
+    0 12px 32px rgba(0, 102, 255, 0.22),
+    0 2px 6px rgba(0, 0, 0, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2.5px solid #ffffff;
+  animation: pulseBadge 3s ease-in-out infinite alternate;
+}
+
+.intro-avatar-svg {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  display: block;
+}
+
+.orbiting-node {
+  position: absolute;
+  z-index: 4;
+  background: #ffffff;
+  border-radius: 50%;
+  padding: 2px;
+  box-shadow: 
+    0 8px 16px rgba(0, 0, 0, 0.08),
+    0 2px 4px rgba(0, 0, 0, 0.04);
+  border: 2px solid #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+}
+
+.orbiting-node svg {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  display: block;
+}
+
+.orbiting-node.node-left {
+  top: 36px;
+  left: 20px;
+  animation: floatLeftNode 3.8s ease-in-out infinite alternate;
+}
+
+.orbiting-node.node-right {
+  bottom: 36px;
+  right: 20px;
+  animation: floatRightNode 4.2s ease-in-out infinite alternate;
+}
+
+.intro-headline {
+  font-family: var(--font-display);
+  font-size: 1.38rem;
+  font-weight: 800;
+  color: #091124;
+  line-height: 1.45;
+  margin: 0;
+  padding: 0 10px;
+  max-width: 320px;
+  opacity: 0;
+  transform: translateY(22px);
+  animation: headlineEntrance 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+}
+
+.intro-gradient-text {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  display: inline-block;
+}
+
+/* Welcome Intro Animations */
+@keyframes introFadeOut {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0px);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.96);
+    filter: blur(3px);
+  }
+}
+
+@keyframes floatLeftNode {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  100% {
+    transform: translate(-5px, -7px) scale(1.04);
+  }
+}
+
+@keyframes floatRightNode {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  100% {
+    transform: translate(5px, 7px) scale(1.04);
+  }
+}
+
+@keyframes headlineEntrance {
+  0% {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
