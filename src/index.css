@@ -1,0 +1,529 @@
+/* ==========================================================================
+   HynaBiz - Premium Mobile-First Splash Screen Styles
+   Design Language: Deep Sapphire Dark Theme with Ambient Glow & Ethereal Blue
+   ========================================================================== */
+
+:root {
+  /* Color Palette */
+  --bg-dark-0: #040711;
+  --bg-dark-1: #070d1e;
+  --bg-dark-2: #0b152e;
+  
+  --brand-blue: #0066ff;
+  --brand-blue-glow: rgba(0, 102, 255, 0.45);
+  --brand-cyan: #00d2ff;
+  --brand-cyan-glow: rgba(0, 210, 255, 0.3);
+  --brand-royal: #2563eb;
+  
+  --text-pure: #ffffff;
+  --text-bright: #f1f5f9;
+  --text-muted: #94a3b8;
+  --text-dim: #64748b;
+  
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-glow: rgba(0, 150, 255, 0.25);
+  
+  /* Typography */
+  --font-display: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  
+  /* Animation Timing & Curves */
+  --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-bounce-soft: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Reset & Box Sizing */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: var(--bg-dark-0);
+  font-family: var(--font-body);
+  color: var(--text-bright);
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+}
+
+.app-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ==========================================================================
+   Viewport & Master Layout
+   ========================================================================== */
+
+.splash-viewport {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: env(safe-area-inset-top, 24px) 24px env(safe-area-inset-bottom, 24px) 24px;
+  background: radial-gradient(circle at 50% 20%, var(--bg-dark-1) 0%, var(--bg-dark-0) 100%);
+  overflow: hidden;
+}
+
+/* ==========================================================================
+   Ambient Background Lighting & Mesh
+   ========================================================================== */
+
+.ambient-background {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+  opacity: 0;
+  animation: ambientFadeIn 1.8s var(--ease-smooth) 0.2s forwards;
+}
+
+.ambient-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  will-change: transform, opacity;
+}
+
+.ambient-glow-top {
+  top: -10%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(circle, var(--brand-blue-glow) 0%, rgba(0, 102, 255, 0) 70%);
+  opacity: 0.6;
+  animation: floatOrbTop 8s ease-in-out infinite alternate;
+}
+
+.ambient-glow-center {
+  top: 42%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 280px;
+  height: 280px;
+  background: radial-gradient(circle, var(--brand-cyan-glow) 0%, rgba(0, 210, 255, 0) 70%);
+  opacity: 0.45;
+  animation: pulseCenter 6s ease-in-out infinite alternate;
+}
+
+.ambient-glow-bottom {
+  bottom: -5%;
+  right: 15%;
+  width: 260px;
+  height: 260px;
+  background: radial-gradient(circle, rgba(37, 99, 235, 0.25) 0%, transparent 70%);
+  opacity: 0.35;
+}
+
+.ambient-grid-overlay {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 32px 32px;
+  mask-image: radial-gradient(circle at 50% 45%, black 20%, transparent 80%);
+  -webkit-mask-image: radial-gradient(circle at 50% 45%, black 20%, transparent 80%);
+}
+
+/* ==========================================================================
+   Center Splash Card & Brand Identity
+   ========================================================================== */
+
+.splash-card {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  max-width: 380px;
+  margin: auto 0;
+  padding: 20px 0;
+}
+
+/* --- Logo Wrapper & Floating Breathing Animation --- */
+
+.logo-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 28px;
+  opacity: 0;
+  transform: scale(0.85);
+  animation: logoEntrance 1.1s var(--ease-smooth) 0.35s forwards;
+}
+
+.logo-backlight-pulse {
+  position: absolute;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--brand-blue) 0%, var(--brand-cyan) 60%, transparent 75%);
+  filter: blur(28px);
+  opacity: 0.55;
+  z-index: 1;
+  animation: backlightPulse 4s ease-in-out infinite alternate;
+}
+
+.logo-outer-ring {
+  position: absolute;
+  width: 132px;
+  height: 132px;
+  border-radius: 36px;
+  border: 1px solid var(--border-glow);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(0, 102, 255, 0.04));
+  box-shadow: 0 8px 32px 0 rgba(0, 50, 150, 0.25);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 2;
+  transition: all 0.4s ease;
+}
+
+.logo-container {
+  position: relative;
+  z-index: 3;
+  width: 114px;
+  height: 114px;
+  border-radius: 28px;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  box-shadow: 
+    0 12px 36px -6px rgba(0, 102, 255, 0.35),
+    0 4px 12px 0 rgba(0, 0, 0, 0.4),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.9);
+  animation: subtleFloat 4.5s ease-in-out 1.45s infinite alternate;
+}
+
+.brand-logo {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 2px 8px rgba(0, 80, 200, 0.15));
+}
+
+/* --- Brand Identity Typography --- */
+
+.brand-identity {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 36px;
+}
+
+.app-title-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  opacity: 0;
+  transform: translateY(12px);
+  animation: revealUp 0.9s var(--ease-smooth) 0.95s forwards;
+}
+
+.app-title {
+  font-family: var(--font-display);
+  font-size: 2.25rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--text-pure);
+  line-height: 1.1;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.text-highlight {
+  background: linear-gradient(135deg, #38bdf8 0%, #3b82f6 50%, #60a5fa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.app-badge {
+  font-family: var(--font-display);
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #38bdf8;
+  background: rgba(56, 189, 248, 0.12);
+  border: 1px solid rgba(56, 189, 248, 0.28);
+  padding: 3px 7px;
+  border-radius: 6px;
+  vertical-align: middle;
+}
+
+.app-tagline {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  letter-spacing: 0.01em;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: revealUp 0.9s var(--ease-smooth) 1.2s forwards;
+}
+
+/* --- Sleek Minimal Loading Indicator --- */
+
+.loader-section {
+  width: 100%;
+  max-width: 260px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: revealUp 0.9s var(--ease-smooth) 1.45s forwards;
+}
+
+.progress-track {
+  width: 100%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.07);
+  border-radius: 999px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #0066ff, #00d2ff);
+  border-radius: 999px;
+  position: relative;
+  transition: width 0.15s ease-out;
+  box-shadow: 0 0 12px rgba(0, 210, 255, 0.7);
+}
+
+.progress-glow-tip {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 6px;
+  height: 6px;
+  background: #ffffff;
+  border-radius: 50%;
+  box-shadow: 0 0 8px 2px #00d2ff;
+}
+
+.status-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  font-weight: 500;
+}
+
+.status-text {
+  transition: color 0.3s ease;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.progress-number {
+  font-family: var(--font-display);
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  color: #38bdf8;
+  margin-left: 8px;
+}
+
+/* ==========================================================================
+   Footer Info & Security Badge
+   ========================================================================== */
+
+.splash-footer {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  opacity: 0;
+  animation: revealUp 1s var(--ease-smooth) 1.7s forwards;
+  padding-bottom: 8px;
+}
+
+.security-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--text-dim);
+  letter-spacing: 0.02em;
+}
+
+.security-dot {
+  width: 6px;
+  height: 6px;
+  background-color: #10b981;
+  border-radius: 50%;
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.7);
+  animation: blinkDot 2.5s infinite ease-in-out;
+}
+
+.version-tag {
+  font-size: 0.68rem;
+  color: rgba(255, 255, 255, 0.25);
+  font-family: var(--font-display);
+  letter-spacing: 0.03em;
+}
+
+/* ==========================================================================
+   Keyframe Animations
+   ========================================================================== */
+
+@keyframes ambientFadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes floatOrbTop {
+  0% {
+    transform: translateX(-50%) translateY(0) scale(1);
+  }
+  100% {
+    transform: translateX(-50%) translateY(18px) scale(1.08);
+  }
+}
+
+@keyframes pulseCenter {
+  0% {
+    transform: translate(-50%, -50%) scale(0.95);
+    opacity: 0.35;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1.1);
+    opacity: 0.55;
+  }
+}
+
+@keyframes logoEntrance {
+  0% {
+    opacity: 0;
+    transform: scale(0.85) translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes backlightPulse {
+  0% {
+    opacity: 0.45;
+    transform: scale(0.95);
+    filter: blur(24px);
+  }
+  100% {
+    opacity: 0.75;
+    transform: scale(1.15);
+    filter: blur(34px);
+  }
+}
+
+@keyframes subtleFloat {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes revealUp {
+  0% {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes blinkDot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.85); }
+}
+
+/* ==========================================================================
+   Responsive Adaptations (Tablet & Desktop)
+   ========================================================================== */
+
+@media (min-width: 640px) {
+  .splash-card {
+    max-width: 440px;
+  }
+
+  .logo-wrapper {
+    margin-bottom: 32px;
+  }
+
+  .logo-container {
+    width: 126px;
+    height: 126px;
+    border-radius: 32px;
+    padding: 12px;
+  }
+
+  .logo-outer-ring {
+    width: 146px;
+    height: 146px;
+    border-radius: 40px;
+  }
+
+  .logo-backlight-pulse {
+    width: 160px;
+    height: 160px;
+  }
+
+  .app-title {
+    font-size: 2.6rem;
+  }
+
+  .app-tagline {
+    font-size: 1.05rem;
+  }
+
+  .loader-section {
+    max-width: 290px;
+  }
+}

@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" href="./src/assets/logo.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#040711" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>HynaBiz - Smart Business Operating System</title>
+  
+  <!-- Google Fonts: Plus Jakarta Sans & Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  
+  <!-- Direct CSS Link for VS Code Live Server & Static Browsers -->
+  <link rel="stylesheet" href="./src/index.css" />
+</head>
+<body>
+  <div id="root">
+    <!-- Production Splash Screen Viewport -->
+    <div class="splash-viewport">
+      
+      <!-- Background Ambient Lighting & Mesh -->
+      <div class="ambient-background">
+        <div class="ambient-glow ambient-glow-top"></div>
+        <div class="ambient-glow ambient-glow-center"></div>
+        <div class="ambient-glow ambient-glow-bottom"></div>
+        <div class="ambient-grid-overlay"></div>
+      </div>
+
+      <!-- Center App Splash Content -->
+      <div class="splash-card">
+        
+        <!-- Animated Brand Logo with Ambient Halo -->
+        <div class="logo-wrapper">
+          <div class="logo-backlight-pulse"></div>
+          <div class="logo-outer-ring"></div>
+          <div class="logo-container">
+            <img src="./src/assets/logo.png" alt="HynaBiz Logo" class="brand-logo" />
+          </div>
+        </div>
+
+        <!-- Brand Identity: App Name & Tagline -->
+        <div class="brand-identity">
+          <div class="app-title-wrapper">
+            <h1 class="app-title">Hyna<span class="text-highlight">Biz</span></h1>
+            <span class="app-badge">OS</span>
+          </div>
+          <p class="app-tagline">Smart Business Operating System</p>
+        </div>
+
+        <!-- Sleek Minimal Loading Indicator -->
+        <div class="loader-section">
+          <div class="progress-track">
+            <div class="progress-bar" id="live-progress-bar" style="width: 0%;">
+              <div class="progress-glow-tip"></div>
+            </div>
+          </div>
+          <div class="status-container">
+            <span class="status-text" id="live-status-text">Initializing secure workspace...</span>
+            <span class="progress-number" id="live-progress-number">0%</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Footer Version & Security Status -->
+      <div class="splash-footer">
+        <div class="security-indicator">
+          <span class="security-dot"></span>
+          <span>Enterprise Encryption Active</span>
+        </div>
+        <span class="version-tag">v2.4.0 (Build 829)</span>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    // Live Server / Direct browser loader runtime
+    (function() {
+      let progress = 0;
+      const bar = document.getElementById('live-progress-bar');
+      const text = document.getElementById('live-status-text');
+      const num = document.getElementById('live-progress-number');
+      const messages = [
+        'Initializing secure workspace...',
+        'Syncing intelligent engine...',
+        'Preparing your enterprise dashboard...',
+        'Ready.'
+      ];
+      
+      const timer = setInterval(() => {
+        if (!bar || !num || !text) return;
+        progress += Math.floor(Math.random() * 6) + 3;
+        if (progress >= 100) {
+          progress = 100;
+          clearInterval(timer);
+        }
+        bar.style.width = progress + '%';
+        num.textContent = progress + '%';
+        if (progress > 75) text.textContent = messages[3];
+        else if (progress > 45) text.textContent = messages[2];
+        else if (progress > 15) text.textContent = messages[1];
+      }, 100);
+    })();
+  </script>
+
+  <!-- React Vite Entry Point -->
+  <script type="module" src="./src/main.jsx"></script>
+</body>
+</html>
