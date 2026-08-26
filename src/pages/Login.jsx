@@ -5,17 +5,14 @@ import SocialLogin from '../components/SocialLogin'
 import Divider from '../components/Divider'
 import PrimaryButton from '../components/PrimaryButton'
 import Toast from '../components/Toast'
-
 export default function Login() {
   const navigate = useNavigate()
   const [toastMessage, setToastMessage] = useState('')
   const [toastVisible, setToastVisible] = useState(false)
-
   const showToast = (message) => {
     setToastMessage(message)
     setToastVisible(true)
   }
-
   useEffect(() => {
     if (toastVisible) {
       const timer = setTimeout(() => {
@@ -24,65 +21,45 @@ export default function Login() {
       return () => clearTimeout(timer)
     }
   }, [toastVisible])
-
   const handleMainLogin = () => {
     showToast('Login functionality will be connected soon.')
   }
-
   const handleSocialLogin = (message) => {
     showToast(message)
   }
-
   const handleCreateWorkspace = () => {
     navigate('/workspace')
   }
-
   return (
     <div className="login-canvas-wrapper">
-      {/* Dynamic Ambient Backdrop Elements */}
       <div className="canvas-ambient-glow glow-top" />
       <div className="canvas-ambient-glow glow-bottom" />
-
-      {/* Centered Mobile-Style Auth Device Card */}
       <div className="auth-phone-card">
-        
-        {/* Mobile Status Bar (9:41, Dynamic Island, Network, Battery) */}
         <div className="mobile-status-bar auth-status-bar">
           <span className="status-time">9:41</span>
           <div className="dynamic-island">
             <span className="island-camera" />
           </div>
           <div className="status-icons">
-            {/* Cellular */}
             <svg className="icon-cellular" viewBox="0 0 18 12" fill="currentColor">
               <rect x="0" y="8" width="3" height="4" rx="0.5" />
               <rect x="5" y="5" width="3" height="7" rx="0.5" />
               <rect x="10" y="2.5" width="3" height="9.5" rx="0.5" />
               <rect x="15" y="0" width="3" height="12" rx="0.5" />
             </svg>
-            {/* Wifi */}
             <svg className="icon-wifi" viewBox="0 0 16 12" fill="currentColor">
               <path d="M8 9.5a1.5 1.5 0 100 3 1.5 1.5 0 000-3zM2.05 3.55a8.42 8.42 0 0111.9 0l-1.06 1.06a6.92 6.92 0 00-9.78 0L2.05 3.55zM4.17 5.67a5.42 5.42 0 017.66 0l-1.06 1.06a3.92 3.92 0 00-5.54 0L4.17 5.67z" />
             </svg>
-            {/* Battery */}
             <div className="battery-icon">
               <div className="battery-fill" />
             </div>
           </div>
         </div>
-
-        {/* Scrollable / Flexible Card Content Viewport */}
         <div className="auth-viewport">
-          
-          {/* Top Section: Light Blue Collaboration Illustration */}
           <div className="auth-top-illustration-section">
             <AuthIllustration />
           </div>
-
-          {/* Bottom Section: White Authentication Section */}
           <div className="auth-bottom-sheet">
-            
-            {/* Welcome Typography Header */}
             <div className="auth-header-group">
               <h1 className="auth-title">Welcome to HYNABIZ</h1>
               <p className="auth-subtitle">Start your journey with</p>
@@ -120,9 +97,7 @@ export default function Login() {
             visible={toastVisible}
             onDismiss={() => setToastVisible(false)}
           />
-
         </div>
-
         {/* Mobile Home Indicator */}
         <div className="mobile-home-indicator">
           <div className="home-bar" />
