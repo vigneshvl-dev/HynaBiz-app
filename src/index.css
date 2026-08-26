@@ -320,7 +320,7 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: center;
-  /* wrapper slides up into position; chars handle their own fade-in */
+  opacity: 1;
   transform: translateY(10px);
   animation: titleSlideUp 0.7s var(--ease-smooth) 0.8s forwards;
 }
@@ -332,25 +332,31 @@ html, body {
   letter-spacing: -0.03em;
   color: var(--text-headline);
   line-height: 1.1;
-}
-
-/* --- Per-character smooth writing animation --- */
-
-.char {
-  display: inline-block;
+  position: relative;
+  /* whole word reveals left-to-right like a single pen stroke */
   opacity: 0;
   clip-path: inset(0 100% 0 0);
-  /* each char starts 0.1s after the previous; writing begins at 1.0s */
-  animation: charWrite 0.38s cubic-bezier(0.22, 0.61, 0.36, 1) calc(var(--i) * 0.1s + 1.0s) forwards;
+  animation: writeWord 1.1s cubic-bezier(0.25, 0.1, 0.25, 1) 1.0s forwards;
 }
 
-.char-highlight {
-  background: linear-gradient(135deg, #0066ff 0%, #0052cc 60%, #0284c7 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+/* moving pen cursor — sweeps across as the word writes */
+.app-title::after {
+  content: '';
+  position: absolute;
+  top: 8%;
+  right: 0;
+  width: 2px;
+  height: 84%;
+  background: linear-gradient(180deg, #0066ff 0%, #00aaff 100%);
+  border-radius: 2px;
+  box-shadow: 0 0 6px rgba(0, 102, 255, 0.7);
+  opacity: 0;
+  /* cursor appears just before writing, travels with the reveal, then fades */
+  animation:
+    cursorAppear 0.1s ease-out 0.95s forwards,
+    cursorFade   0.3s ease-in  2.05s forwards;
 }
 
-/* keep old class for any other uses */
 .text-highlight {
   background: linear-gradient(135deg, #0066ff 0%, #0052cc 60%, #0284c7 100%);
   -webkit-background-clip: text;
@@ -530,6 +536,33 @@ html, body {
     opacity: 1;
     clip-path: inset(0 0% 0 0);
   }
+}
+
+/* Whole-word smooth writing reveal */
+@keyframes writeWord {
+  0% {
+    opacity: 0;
+    clip-path: inset(0 100% 0 0);
+  }
+  8% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+    clip-path: inset(0 0% 0 0);
+  }
+}
+
+/* Pen cursor appears just before writing */
+@keyframes cursorAppear {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+/* Pen cursor fades after writing completes */
+@keyframes cursorFade {
+  0%   { opacity: 1; }
+  100% { opacity: 0; }
 }
 
 /* ==========================================================================
