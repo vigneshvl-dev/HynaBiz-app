@@ -65,10 +65,6 @@ export default function SplashScreen() {
                   Hyna<span className="text-highlight">Biz</span>
                 </h1>
               </div>
-
-              <p className="app-tagline">
-                Smart Business Operating System
-              </p>
             </div>
 
           </div>
