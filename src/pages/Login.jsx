@@ -5,15 +5,26 @@ import SocialLogin from '../components/SocialLogin'
 import Divider from '../components/Divider'
 import PrimaryButton from '../components/PrimaryButton'
 import Toast from '../components/Toast'
+import PageTransition from '../components/PageTransition'
+
 export default function Login() {
   const navigate = useNavigate()
   const [toastMessage, setToastMessage] = useState('')
   const [toastVisible, setToastVisible] = useState(false)
   const [introStage, setIntroStage] = useState('active')
+  const [pageStage, setPageStage] = useState('entering')
+
   const showToast = (message) => {
     setToastMessage(message)
     setToastVisible(true)
   }
+
+  // Animate exit then navigate to target
+  const transitionTo = (path) => {
+    setPageStage('leaving')
+    setTimeout(() => navigate(path), 380)
+  }
+
   useEffect(() => {
     const leaveTimer = setTimeout(() => {
       setIntroStage('leaving')
@@ -27,6 +38,7 @@ export default function Login() {
       clearTimeout(doneTimer)
     }
   }, [])
+
   useEffect(() => {
     if (toastVisible) {
       const timer = setTimeout(() => {
@@ -35,17 +47,21 @@ export default function Login() {
       return () => clearTimeout(timer)
     }
   }, [toastVisible])
+
   const handleMainLogin = () => {
-    showToast('Login functionality will be connected soon.')
+    transitionTo('/workspace')
   }
-  const handleSocialLogin = (message) => {
-    showToast(message)
+
+  const handleSocialLogin = () => {
+    transitionTo('/workspace')
   }
+
   return (
-    <div className="login-canvas-wrapper">
-      <div className="canvas-ambient-glow glow-top" />
-      <div className="canvas-ambient-glow glow-bottom" />
-      <div className="auth-phone-card">
+    <PageTransition stage={pageStage}>
+      <div className="login-canvas-wrapper">
+        <div className="canvas-ambient-glow glow-top" />
+        <div className="canvas-ambient-glow glow-bottom" />
+        <div className="auth-phone-card">
         <div className="mobile-status-bar auth-status-bar">
           <span className="status-time">9:41</span>
           <div className="dynamic-island">
@@ -142,6 +158,6 @@ export default function Login() {
         </div>
       </div>
     </div>
+    </PageTransition>
   )
 }
-

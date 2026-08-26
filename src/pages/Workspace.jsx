@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import Logo from '../components/Logo'
 import PrimaryButton from '../components/PrimaryButton'
 import Toast from '../components/Toast'
+import PageTransition from '../components/PageTransition'
 
 export default function Workspace() {
   const navigate = useNavigate()
@@ -22,7 +23,8 @@ export default function Workspace() {
   }
 
   return (
-    <div className="login-canvas-wrapper">
+    <PageTransition>
+      <div className="login-canvas-wrapper">
       <div className="canvas-ambient-glow glow-top" />
       <div className="canvas-ambient-glow glow-bottom" />
 
@@ -110,5 +112,6 @@ export default function Workspace() {
         </div>
       </div>
     </div>
+    </PageTransition>
   )
 }

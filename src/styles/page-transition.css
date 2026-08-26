@@ -1,0 +1,37 @@
+/* =============================================
+   Page Transition System - Slide-up / Fade
+   ============================================= */
+
+.page-transition {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  will-change: transform, opacity;
+}
+
+/* --- ENTER: starts below, fades in and rises up --- */
+.page-transition--entering {
+  opacity: 0;
+  transform: translateY(40px) scale(0.98);
+}
+
+/* --- VISIBLE: settled state --- */
+.page-transition--visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  transition:
+    opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* --- EXIT: slides down and fades out (triggered by navigate wrapper) --- */
+.page-transition--leaving {
+  opacity: 0;
+  transform: translateY(-24px) scale(0.97);
+  transition:
+    opacity 0.35s cubic-bezier(0.4, 0, 1, 1),
+    transform 0.35s cubic-bezier(0.4, 0, 1, 1);
+  pointer-events: none;
+}
