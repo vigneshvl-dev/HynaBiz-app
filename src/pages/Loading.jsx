@@ -6,10 +6,11 @@ export default function Loading() {
   const navigate = useNavigate()
 
   useEffect(() => {
-    // Automatically transition to login page after splash duration (2.8s delay + 0.9s fade out = 3.7s)
+    // Navigate slightly before the fade-out completes (2.8s delay + 0.9s = 3.7s)
+    // so login is already mounted when splash becomes invisible
     const timer = setTimeout(() => {
       navigate('/login')
-    }, 3700)
+    }, 3500)
 
     return () => clearTimeout(timer)
   }, [navigate])
