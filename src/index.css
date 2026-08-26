@@ -345,29 +345,22 @@ html, body {
   letter-spacing: -0.03em;
   color: var(--text-headline);
   line-height: 1.1;
-  position: relative;
-  /* whole word reveals left-to-right like a single pen stroke */
-  opacity: 0;
-  clip-path: inset(0 100% 0 0);
-  animation: writeWord 1.1s cubic-bezier(0.25, 0.1, 0.25, 1) 1.0s forwards;
 }
 
-/* moving pen cursor — sweeps across as the word writes */
-.app-title::after {
-  content: '';
-  position: absolute;
-  top: 8%;
-  right: 0;
-  width: 2px;
-  height: 84%;
-  background: linear-gradient(180deg, #0066ff 0%, #00aaff 100%);
-  border-radius: 2px;
-  box-shadow: 0 0 6px rgba(0, 102, 255, 0.7);
+/* --- Per-character smooth writing animation --- */
+
+.char {
+  display: inline-block;
   opacity: 0;
-  /* cursor appears just before writing, travels with the reveal, then fades */
-  animation:
-    cursorAppear 0.1s ease-out 0.95s forwards,
-    cursorFade   0.3s ease-in  2.05s forwards;
+  clip-path: inset(0 100% 0 0);
+  /* 7 chars × (0.125s stagger + 0.25s duration) = 1s total writing time */
+  animation: charWrite 0.25s cubic-bezier(0.22, 0.61, 0.36, 1) calc(var(--i) * 0.125s + 1.0s) forwards;
+}
+
+.char-highlight {
+  background: linear-gradient(135deg, #0066ff 0%, #0052cc 60%, #0284c7 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .text-highlight {
