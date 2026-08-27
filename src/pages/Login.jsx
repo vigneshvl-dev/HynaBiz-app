@@ -49,11 +49,11 @@ export default function Login() {
   }, [toastVisible])
 
   const handleMainLogin = () => {
-    transitionTo('/workspace')
+    showToast('Logged in successfully!')
   }
 
   const handleSocialLogin = () => {
-    transitionTo('/workspace')
+    showToast('Social login successful!')
   }
 
   return (
