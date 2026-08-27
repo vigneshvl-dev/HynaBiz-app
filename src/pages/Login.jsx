@@ -123,7 +123,7 @@ export default function Login() {
               </div>
 
               <h2 className="intro-headline">
-                Connect business people<br />through <span className="intro-gradient-text"><span className="brand-hyna-inline">HYNA</span><span className="brand-biz-inline">BIZ</span></span>
+                Connect Buyers, Distributors &amp; Businesses
               </h2>
             </div>
           ) : (
