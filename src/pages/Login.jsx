@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { Mail, Lock, Eye, EyeOff } from 'lucide-react'
 import AuthIllustration from '../components/AuthIllustration'
 import SocialLogin from '../components/SocialLogin'
 import Divider from '../components/Divider'
@@ -13,6 +14,10 @@ export default function Login() {
   const [toastVisible, setToastVisible] = useState(false)
   const [introStage, setIntroStage] = useState('active')
   const [pageStage, setPageStage] = useState('entering')
+  const [authMode, setAuthMode] = useState('signin')
+  const [emailOrPhone, setEmailOrPhone] = useState('')
+  const [password, setPassword] = useState('')
+  const [showPassword, setShowPassword] = useState(false)
 
   const showToast = (message) => {
     setToastMessage(message)
@@ -48,12 +53,17 @@ export default function Login() {
     }
   }, [toastVisible])
 
-  const handleMainLogin = () => {
-    showToast('Logged in successfully!')
+  const handleMainSubmit = (e) => {
+    if (e) e.preventDefault()
+    if (authMode === 'signin') {
+      showToast('Signed in successfully!')
+    } else {
+      showToast('Logged in successfully!')
+    }
   }
 
-  const handleSocialLogin = () => {
-    showToast('Social login successful!')
+  const handleSocialLogin = (message) => {
+    showToast(message || 'Social login successful!')
   }
 
   return (
@@ -137,13 +147,93 @@ export default function Login() {
                   <h1 className="auth-title">
                     Welcome to <span className="auth-title-gradient"><span className="brand-hyna-inline">HYNA</span><span className="brand-biz-inline">BIZ</span></span>
                   </h1>
-                  <p className="auth-subtitle">Start your journey with</p>
+                  <p className="auth-subtitle">
+                    {authMode === 'signin' ? 'Sign in to access your business' : 'Login to continue your journey'}
+                  </p>
                 </div>
+
+                <div className="auth-mode-toggle-container">
+                  <div className="auth-mode-toggle" role="tablist">
+                    <button
+                      type="button"
+                      role="tab"
+                      aria-selected={authMode === 'signin'}
+                      className={`mode-toggle-btn ${authMode === 'signin' ? 'active' : ''}`}
+                      onClick={() => setAuthMode('signin')}
+                    >
+                      Sign In
+                    </button>
+                    <button
+                      type="button"
+                      role="tab"
+                      aria-selected={authMode === 'login'}
+                      className={`mode-toggle-btn ${authMode === 'login' ? 'active' : ''}`}
+                      onClick={() => setAuthMode('login')}
+                    >
+                      Login
+                    </button>
+                    <div className={`mode-toggle-pill ${authMode}`} />
+                  </div>
+                </div>
+
                 <SocialLogin onSocialClick={handleSocialLogin} />
                 <Divider text="Or" />
-                <PrimaryButton onClick={handleMainLogin}>
-                  Login
-                </PrimaryButton>
+
+                <form onSubmit={handleMainSubmit} className="auth-input-form">
+                  <div className="input-field-wrapper">
+                    <span className="input-icon">
+                      <Mail size={18} />
+                    </span>
+                    <input
+                      type="text"
+                      placeholder="Email or Phone Number"
+                      value={emailOrPhone}
+                      onChange={(e) => setEmailOrPhone(e.target.value)}
+                      className="auth-input"
+                    />
+                  </div>
+
+                  <div className="input-field-wrapper">
+                    <span className="input-icon">
+                      <Lock size={18} />
+                    </span>
+                    <input
+                      type={showPassword ? 'text' : 'password'}
+                      placeholder="Password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      className="auth-input"
+                    />
+                    <button
+                      type="button"
+                      className="password-toggle-btn"
+                      onClick={() => setShowPassword(!showPassword)}
+                      tabIndex="-1"
+                      aria-label={showPassword ? 'Hide password' : 'Show password'}
+                    >
+                      {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+                    </button>
+                  </div>
+
+                  <div className="auth-actions-group">
+                    <PrimaryButton type="submit" onClick={handleMainSubmit}>
+                      {authMode === 'signin' ? 'Sign In' : 'Login'}
+                    </PrimaryButton>
+                  </div>
+                </form>
+
+                <div className="auth-switch-footer">
+                  <span className="switch-text">
+                    {authMode === 'signin' ? 'Prefer to login instead?' : 'First time here?'}
+                  </span>
+                  <button
+                    type="button"
+                    className="switch-link-btn"
+                    onClick={() => setAuthMode(authMode === 'signin' ? 'login' : 'signin')}
+                  >
+                    {authMode === 'signin' ? 'Login' : 'Sign In'}
+                  </button>
+                </div>
               </div>
             </>
           )}
