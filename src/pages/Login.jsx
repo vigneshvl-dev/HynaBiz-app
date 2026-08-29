@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Mail, Lock, Eye, EyeOff } from 'lucide-react'
+import { Mail, Lock, Eye, EyeOff, ArrowRight, Sparkles } from 'lucide-react'
 import AuthIllustration from '../components/AuthIllustration'
 import SocialLogin from '../components/SocialLogin'
 import Divider from '../components/Divider'
@@ -20,6 +20,7 @@ export default function Login() {
   const [confirmPassword, setConfirmPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
+  const [showFinalCtaPopup, setShowFinalCtaPopup] = useState(false)
 
   const showToast = (message) => {
     setToastMessage(message)
@@ -75,13 +76,8 @@ export default function Login() {
         showToast('Passwords do not match!')
         return
       }
-      // Successful Sign Up action -> notify user and switch to login mode
-      showToast('Account created successfully! Please login.')
-      setPassword('')
-      setConfirmPassword('')
-      setShowPassword(false)
-      setShowConfirmPassword(false)
-      setAuthMode('login')
+      // Show Final CTA completion modal
+      setShowFinalCtaPopup(true)
     } else {
       showToast('Logged in successfully!')
     }
@@ -169,12 +165,26 @@ export default function Login() {
 
               <div className="auth-bottom-sheet">
                 <div className="auth-header-group">
-                  <h1 className="auth-title">
-                    Welcome to <span className="auth-title-gradient"><span className="brand-hyna-inline">HYNA</span><span className="brand-biz-inline">BIZ</span></span>
-                  </h1>
-                  <p className="auth-subtitle">
-                    {authMode === 'login' ? 'Login to continue your journey' : 'Sign up to access your business'}
-                  </p>
+                  {authMode === 'login' ? (
+                    <>
+                      <h1 className="auth-title">
+                        Welcome to <span className="auth-title-gradient"><span className="brand-hyna-inline">HYNA</span><span className="brand-biz-inline">BIZ</span></span>
+                      </h1>
+                      <p className="auth-subtitle">
+                        Login to continue your journey
+                      </p>
+                    </>
+                  ) : (
+                    <>
+                      <h1 className="auth-title cta-structure-title">
+                        What's your next business goal?
+                      </h1>
+                      <div className="cta-quote-block">
+                        <p className="cta-quote-title">Tell HynaBiz.</p>
+                        <p className="cta-quote-sub">We'll help you find the path.</p>
+                      </div>
+                    </>
+                  )}
                 </div>
 
                 <div className="auth-mode-toggle-container">
@@ -266,9 +276,21 @@ export default function Login() {
 
                   <div className="auth-actions-group">
                     <PrimaryButton type="submit" onClick={handleMainSubmit}>
-                      {authMode === 'login' ? 'Login' : 'Sign Up'}
+                      {authMode === 'login' ? (
+                        'Login'
+                      ) : (
+                        <span className="btn-with-arrow">
+                          Start Your Business Journey <ArrowRight size={18} />
+                        </span>
+                      )}
                     </PrimaryButton>
                   </div>
+
+                  {authMode === 'signup' && (
+                    <p className="cta-small-tagline">
+                      Free to get started • Global network • AI-powered
+                    </p>
+                  )}
                 </form>
 
                 <div className="auth-switch-footer">
@@ -286,6 +308,41 @@ export default function Login() {
               </div>
             </>
           )}
+
+          {showFinalCtaPopup && (
+            <div className="cta-popup-overlay">
+              <div className="cta-popup-card">
+                <div className="cta-popup-badge">
+                  <Sparkles size={26} color="#0066ff" />
+                </div>
+                <h2 className="cta-popup-title">What's your next business goal?</h2>
+                <div className="cta-popup-quote">
+                  <p className="quote-heading">Tell HynaBiz.</p>
+                  <p className="quote-text">We'll help you find the path.</p>
+                </div>
+
+                <button
+                  type="button"
+                  className="primary-auth-button cta-popup-btn"
+                  onClick={() => {
+                    setShowFinalCtaPopup(false)
+                    setAuthMode('login')
+                    setPassword('')
+                    setConfirmPassword('')
+                    showToast('Account created! Log in to start your journey.')
+                  }}
+                >
+                  <span>Start Your Business Journey</span>
+                  <ArrowRight size={18} />
+                </button>
+
+                <p className="cta-popup-small">
+                  Free to get started • Global network • AI-powered
+                </p>
+              </div>
+            </div>
+          )}
+
           <Toast
             message={toastMessage}
             visible={toastVisible}
