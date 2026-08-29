@@ -14,7 +14,7 @@ export default function Login() {
   const [toastVisible, setToastVisible] = useState(false)
   const [introStage, setIntroStage] = useState('active')
   const [pageStage, setPageStage] = useState('entering')
-  const [authMode, setAuthMode] = useState('login')
+  const [authMode, setAuthMode] = useState('signup')
   const [emailOrPhone, setEmailOrPhone] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
@@ -192,20 +192,20 @@ export default function Login() {
                     <button
                       type="button"
                       role="tab"
-                      aria-selected={authMode === 'login'}
-                      className={`mode-toggle-btn ${authMode === 'login' ? 'active' : ''}`}
-                      onClick={() => setAuthMode('login')}
-                    >
-                      Login
-                    </button>
-                    <button
-                      type="button"
-                      role="tab"
                       aria-selected={authMode === 'signup'}
                       className={`mode-toggle-btn ${authMode === 'signup' ? 'active' : ''}`}
                       onClick={() => setAuthMode('signup')}
                     >
                       Sign Up
+                    </button>
+                    <button
+                      type="button"
+                      role="tab"
+                      aria-selected={authMode === 'login'}
+                      className={`mode-toggle-btn ${authMode === 'login' ? 'active' : ''}`}
+                      onClick={() => setAuthMode('login')}
+                    >
+                      Login
                     </button>
                     <div className={`mode-toggle-pill ${authMode}`} />
                   </div>
