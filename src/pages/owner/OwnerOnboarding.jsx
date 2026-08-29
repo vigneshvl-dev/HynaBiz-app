@@ -16,7 +16,9 @@ import {
   Target,
   Globe,
   MessageSquare,
-  X
+  X,
+  Upload,
+  Camera
 } from 'lucide-react'
 import { useOwner } from '../../context/OwnerContext'
 import { COUNTRY_OPTIONS, INDUSTRY_OPTIONS } from '../../data/mockOwnerData'
@@ -61,6 +63,30 @@ export default function OwnerOnboarding() {
 
   const [toastMessage, setToastMessage] = useState('')
   const [toastVisible, setToastVisible] = useState(false)
+
+  const handleProfilePhotoUpload = (e) => {
+    const file = e.target.files[0]
+    if (file) {
+      const reader = new FileReader()
+      reader.onloadend = () => {
+        setOwnerProfile((prev) => ({ ...prev, avatarUrl: reader.result }))
+        showToast('Profile photo uploaded!')
+      }
+      reader.readAsDataURL(file)
+    }
+  }
+
+  const handleBusinessLogoUpload = (e) => {
+    const file = e.target.files[0]
+    if (file) {
+      const reader = new FileReader()
+      reader.onloadend = () => {
+        setBusinessProfile((prev) => ({ ...prev, logoUrl: reader.result }))
+        showToast('Business logo uploaded!')
+      }
+      reader.readAsDataURL(file)
+    }
+  }
 
   // Modals for Step 3 Add Product / Add Service
   const [showAddProductModal, setShowAddProductModal] = useState(false)
@@ -175,14 +201,53 @@ export default function OwnerOnboarding() {
 
             <div className="owner-form-grid">
               <div>
-                <label className="owner-input-label">Profile Photo URL</label>
-                <input
-                  type="text"
-                  className="owner-input-field"
-                  value={ownerProfile.avatarUrl}
-                  onChange={(e) => setOwnerProfile({ ...ownerProfile, avatarUrl: e.target.value })}
-                  placeholder="https://example.com/photo.jpg"
-                />
+                <label className="owner-input-label">Profile Photo</label>
+                <div className="photo-upload-wrapper">
+                  {ownerProfile.avatarUrl ? (
+                    <div className="avatar-preview-container">
+                      <img
+                        src={ownerProfile.avatarUrl}
+                        alt="Profile Preview"
+                        className="avatar-preview-img"
+                      />
+                      <div className="avatar-preview-actions">
+                        <label className="upload-image-btn" style={{ cursor: 'pointer' }}>
+                          <Camera size={14} />
+                          <span>Upload Image</span>
+                          <input
+                            type="file"
+                            accept="image/*"
+                            style={{ display: 'none' }}
+                            onChange={handleProfilePhotoUpload}
+                          />
+                        </label>
+                        <button
+                          type="button"
+                          className="remove-image-btn"
+                          onClick={() => setOwnerProfile({ ...ownerProfile, avatarUrl: '' })}
+                        >
+                          Remove
+                        </button>
+                      </div>
+                    </div>
+                  ) : (
+                    <label className="photo-upload-box">
+                      <div className="upload-icon-circle">
+                        <Upload size={22} color="#0066ff" />
+                      </div>
+                      <div className="upload-box-text">
+                        <span className="upload-main-text">Upload Image</span>
+                        <span className="upload-sub-text">PNG, JPG or WEBP (Max 5MB)</span>
+                      </div>
+                      <input
+                        type="file"
+                        accept="image/*"
+                        style={{ display: 'none' }}
+                        onChange={handleProfilePhotoUpload}
+                      />
+                    </label>
+                  )}
+                </div>
               </div>
 
               <div className="form-group-row">
@@ -284,6 +349,55 @@ export default function OwnerOnboarding() {
             </div>
 
             <div className="owner-form-grid">
+              <div>
+                <label className="owner-input-label">Business Logo</label>
+                <div className="photo-upload-wrapper">
+                  {businessProfile.logoUrl ? (
+                    <div className="avatar-preview-container">
+                      <img
+                        src={businessProfile.logoUrl}
+                        alt="Business Logo Preview"
+                        className="logo-preview-img"
+                      />
+                      <div className="avatar-preview-actions">
+                        <label className="upload-image-btn" style={{ cursor: 'pointer' }}>
+                          <Camera size={14} />
+                          <span>Upload Logo</span>
+                          <input
+                            type="file"
+                            accept="image/*"
+                            style={{ display: 'none' }}
+                            onChange={handleBusinessLogoUpload}
+                          />
+                        </label>
+                        <button
+                          type="button"
+                          className="remove-image-btn"
+                          onClick={() => setBusinessProfile({ ...businessProfile, logoUrl: '' })}
+                        >
+                          Remove
+                        </button>
+                      </div>
+                    </div>
+                  ) : (
+                    <label className="photo-upload-box">
+                      <div className="upload-icon-circle">
+                        <Upload size={22} color="#0066ff" />
+                      </div>
+                      <div className="upload-box-text">
+                        <span className="upload-main-text">Upload Logo</span>
+                        <span className="upload-sub-text">PNG, JPG or WEBP (Max 5MB)</span>
+                      </div>
+                      <input
+                        type="file"
+                        accept="image/*"
+                        style={{ display: 'none' }}
+                        onChange={handleBusinessLogoUpload}
+                      />
+                    </label>
+                  )}
+                </div>
+              </div>
               <div className="form-group-row">
                 <div>
                   <label className="owner-input-label">Business Name</label>

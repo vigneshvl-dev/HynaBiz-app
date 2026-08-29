@@ -776,3 +776,133 @@
   max-height: 90vh;
   overflow-y: auto;
 }
+
+/* --- Image Upload Component Styles --- */
+.photo-upload-wrapper {
+  width: 100%;
+  margin-top: 4px;
+}
+
+.photo-upload-box {
+  width: 100%;
+  border: 2px dashed #cbd5e1;
+  background: #f8fafc;
+  border-radius: 16px;
+  padding: 20px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: all 0.22s ease;
+  text-align: center;
+}
+
+.photo-upload-box:hover {
+  background: #ffffff;
+  border-color: #0066ff;
+  box-shadow: 0 6px 20px rgba(0, 102, 255, 0.08);
+}
+
+.upload-icon-circle {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.upload-box-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.upload-main-text {
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: #0066ff;
+}
+
+.upload-sub-text {
+  font-family: var(--font-body);
+  font-size: 0.74rem;
+  color: #64748b;
+}
+
+.avatar-preview-container {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: #f8fafc;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 12px 16px;
+}
+
+.avatar-preview-img {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #0066ff;
+  box-shadow: 0 4px 12px rgba(0, 102, 255, 0.2);
+}
+
+.logo-preview-img {
+  width: 64px;
+  height: 64px;
+  border-radius: 14px;
+  object-fit: cover;
+  border: 2px solid #0066ff;
+  box-shadow: 0 4px 12px rgba(0, 102, 255, 0.2);
+}
+
+.avatar-preview-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.upload-image-btn {
+  background: #0066ff;
+  color: #ffffff;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 10px;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+}
+
+.upload-image-btn:hover {
+  background: #0052cc;
+  transform: translateY(-1px);
+}
+
+.remove-image-btn {
+  background: #f1f5f9;
+  color: #ef4444;
+  border: 1px solid #fca5a5;
+  padding: 8px 14px;
+  border-radius: 10px;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.remove-image-btn:hover {
+  background: #fee2e2;
+}
