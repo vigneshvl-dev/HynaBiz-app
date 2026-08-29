@@ -14,10 +14,12 @@ export default function Login() {
   const [toastVisible, setToastVisible] = useState(false)
   const [introStage, setIntroStage] = useState('active')
   const [pageStage, setPageStage] = useState('entering')
-  const [authMode, setAuthMode] = useState('signin')
+  const [authMode, setAuthMode] = useState('login')
   const [emailOrPhone, setEmailOrPhone] = useState('')
   const [password, setPassword] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
 
   const showToast = (message) => {
     setToastMessage(message)
@@ -55,8 +57,31 @@ export default function Login() {
 
   const handleMainSubmit = (e) => {
     if (e) e.preventDefault()
-    if (authMode === 'signin') {
-      showToast('Signed in successfully!')
+    if (!emailOrPhone.trim()) {
+      showToast('Please enter your email or phone number.')
+      return
+    }
+    if (!password) {
+      showToast(authMode === 'login' ? 'Please enter your password.' : 'Please create a password.')
+      return
+    }
+
+    if (authMode === 'signup') {
+      if (!confirmPassword) {
+        showToast('Please confirm your password.')
+        return
+      }
+      if (password !== confirmPassword) {
+        showToast('Passwords do not match!')
+        return
+      }
+      // Successful Sign Up action -> notify user and switch to login mode
+      showToast('Account created successfully! Please login.')
+      setPassword('')
+      setConfirmPassword('')
+      setShowPassword(false)
+      setShowConfirmPassword(false)
+      setAuthMode('login')
     } else {
       showToast('Logged in successfully!')
     }
@@ -148,7 +173,7 @@ export default function Login() {
                     Welcome to <span className="auth-title-gradient"><span className="brand-hyna-inline">HYNA</span><span className="brand-biz-inline">BIZ</span></span>
                   </h1>
                   <p className="auth-subtitle">
-                    {authMode === 'signin' ? 'Sign in to access your business' : 'Login to continue your journey'}
+                    {authMode === 'login' ? 'Login to continue your journey' : 'Sign up to access your business'}
                   </p>
                 </div>
 
@@ -157,20 +182,20 @@ export default function Login() {
                     <button
                       type="button"
                       role="tab"
-                      aria-selected={authMode === 'signin'}
-                      className={`mode-toggle-btn ${authMode === 'signin' ? 'active' : ''}`}
-                      onClick={() => setAuthMode('signin')}
-                    >
-                      Sign In
-                    </button>
-                    <button
-                      type="button"
-                      role="tab"
                       aria-selected={authMode === 'login'}
                       className={`mode-toggle-btn ${authMode === 'login' ? 'active' : ''}`}
                       onClick={() => setAuthMode('login')}
                     >
                       Login
+                    </button>
+                    <button
+                      type="button"
+                      role="tab"
+                      aria-selected={authMode === 'signup'}
+                      className={`mode-toggle-btn ${authMode === 'signup' ? 'active' : ''}`}
+                      onClick={() => setAuthMode('signup')}
+                    >
+                      Sign Up
                     </button>
                     <div className={`mode-toggle-pill ${authMode}`} />
                   </div>
@@ -199,7 +224,7 @@ export default function Login() {
                     </span>
                     <input
                       type={showPassword ? 'text' : 'password'}
-                      placeholder="Password"
+                      placeholder={authMode === 'login' ? 'Password' : 'Create Password'}
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       className="auth-input"
@@ -215,23 +240,47 @@ export default function Login() {
                     </button>
                   </div>
 
+                  {authMode === 'signup' && (
+                    <div className="input-field-wrapper">
+                      <span className="input-icon">
+                        <Lock size={18} />
+                      </span>
+                      <input
+                        type={showConfirmPassword ? 'text' : 'password'}
+                        placeholder="Confirm Password"
+                        value={confirmPassword}
+                        onChange={(e) => setConfirmPassword(e.target.value)}
+                        className="auth-input"
+                      />
+                      <button
+                        type="button"
+                        className="password-toggle-btn"
+                        onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                        tabIndex="-1"
+                        aria-label={showConfirmPassword ? 'Hide password' : 'Show password'}
+                      >
+                        {showConfirmPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+                      </button>
+                    </div>
+                  )}
+
                   <div className="auth-actions-group">
                     <PrimaryButton type="submit" onClick={handleMainSubmit}>
-                      {authMode === 'signin' ? 'Sign In' : 'Login'}
+                      {authMode === 'login' ? 'Login' : 'Sign Up'}
                     </PrimaryButton>
                   </div>
                 </form>
 
                 <div className="auth-switch-footer">
                   <span className="switch-text">
-                    {authMode === 'signin' ? 'Prefer to login instead?' : 'First time here?'}
+                    {authMode === 'login' ? "Don't have an account?" : 'Already have an account?'}
                   </span>
                   <button
                     type="button"
                     className="switch-link-btn"
-                    onClick={() => setAuthMode(authMode === 'signin' ? 'login' : 'signin')}
+                    onClick={() => setAuthMode(authMode === 'login' ? 'signup' : 'login')}
                   >
-                    {authMode === 'signin' ? 'Login' : 'Sign In'}
+                    {authMode === 'login' ? 'Sign Up' : 'Login'}
                   </button>
                 </div>
               </div>

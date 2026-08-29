@@ -974,11 +974,11 @@
   transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.mode-toggle-pill.signin {
+.mode-toggle-pill.login {
   transform: translateX(0);
 }
 
-.mode-toggle-pill.login {
+.mode-toggle-pill.signup {
   transform: translateX(100%);
 }
 
