@@ -697,6 +697,11 @@ export default function Login() {
                   setConfirmPassword('')
                   const roleName = selectedSubRole ? `${selectedCategory} (${selectedSubRole})` : selectedCategory
                   showToast(`Selected ${roleName}! Welcome to HynaBiz.`)
+                  if (selectedCategory === 'BUSINESS' && (selectedSubRole === 'Owner' || !selectedSubRole)) {
+                    setTimeout(() => {
+                      navigate('/owner/onboarding')
+                    }, 400)
+                  }
                 }}
               >
                 <span>Continue to HynaBiz</span>
