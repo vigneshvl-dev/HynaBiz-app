@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Mail, Lock, Eye, EyeOff, ArrowRight, Sparkles } from 'lucide-react'
+import { Mail, Lock, Eye, EyeOff, ArrowRight, Sparkles, X } from 'lucide-react'
 import AuthIllustration from '../components/AuthIllustration'
 import SocialLogin from '../components/SocialLogin'
 import Divider from '../components/Divider'
@@ -76,9 +76,12 @@ export default function Login() {
         showToast('Passwords do not match!')
         return
       }
-      // Show Final CTA completion modal
+      // Show Final CTA completion popup after Sign Up
       setShowFinalCtaPopup(true)
+      showToast('Account registered successfully!')
     } else {
+      // Show Final CTA completion popup after Login / Sign In
+      setShowFinalCtaPopup(true)
       showToast('Logged in successfully!')
     }
   }
@@ -165,26 +168,12 @@ export default function Login() {
 
               <div className="auth-bottom-sheet">
                 <div className="auth-header-group">
-                  {authMode === 'login' ? (
-                    <>
-                      <h1 className="auth-title">
-                        Welcome to <span className="auth-title-gradient"><span className="brand-hyna-inline">HYNA</span><span className="brand-biz-inline">BIZ</span></span>
-                      </h1>
-                      <p className="auth-subtitle">
-                        Login to continue your journey
-                      </p>
-                    </>
-                  ) : (
-                    <>
-                      <h1 className="auth-title cta-structure-title">
-                        What's your next business goal?
-                      </h1>
-                      <div className="cta-quote-block">
-                        <p className="cta-quote-title">Tell HynaBiz.</p>
-                        <p className="cta-quote-sub">We'll help you find the path.</p>
-                      </div>
-                    </>
-                  )}
+                  <h1 className="auth-title">
+                    Welcome to <span className="auth-title-gradient"><span className="brand-hyna-inline">HYNA</span><span className="brand-biz-inline">BIZ</span></span>
+                  </h1>
+                  <p className="auth-subtitle">
+                    {authMode === 'login' ? 'Login to continue your journey' : 'Sign up to access your business'}
+                  </p>
                 </div>
 
                 <div className="auth-mode-toggle-container">
@@ -276,21 +265,9 @@ export default function Login() {
 
                   <div className="auth-actions-group">
                     <PrimaryButton type="submit" onClick={handleMainSubmit}>
-                      {authMode === 'login' ? (
-                        'Login'
-                      ) : (
-                        <span className="btn-with-arrow">
-                          Start Your Business Journey <ArrowRight size={18} />
-                        </span>
-                      )}
+                      {authMode === 'login' ? 'Login' : 'Sign Up'}
                     </PrimaryButton>
                   </div>
-
-                  {authMode === 'signup' && (
-                    <p className="cta-small-tagline">
-                      Free to get started • Global network • AI-powered
-                    </p>
-                  )}
                 </form>
 
                 <div className="auth-switch-footer">
@@ -309,46 +286,54 @@ export default function Login() {
             </>
           )}
 
-          {showFinalCtaPopup && (
-            <div className="cta-popup-overlay">
-              <div className="cta-popup-card">
-                <div className="cta-popup-badge">
-                  <Sparkles size={26} color="#0066ff" />
-                </div>
-                <h2 className="cta-popup-title">What's your next business goal?</h2>
-                <div className="cta-popup-quote">
-                  <p className="quote-heading">Tell HynaBiz.</p>
-                  <p className="quote-text">We'll help you find the path.</p>
-                </div>
-
-                <button
-                  type="button"
-                  className="primary-auth-button cta-popup-btn"
-                  onClick={() => {
-                    setShowFinalCtaPopup(false)
-                    setAuthMode('login')
-                    setPassword('')
-                    setConfirmPassword('')
-                    showToast('Account created! Log in to start your journey.')
-                  }}
-                >
-                  <span>Start Your Business Journey</span>
-                  <ArrowRight size={18} />
-                </button>
-
-                <p className="cta-popup-small">
-                  Free to get started • Global network • AI-powered
-                </p>
-              </div>
-            </div>
-          )}
-
           <Toast
             message={toastMessage}
             visible={toastVisible}
             onDismiss={() => setToastVisible(false)}
           />
         </div>
+
+        {showFinalCtaPopup && (
+          <div className="cta-popup-overlay">
+            <div className="cta-popup-card">
+              <button
+                type="button"
+                className="cta-popup-close-btn"
+                onClick={() => setShowFinalCtaPopup(false)}
+                aria-label="Close modal"
+              >
+                <X size={18} />
+              </button>
+              <div className="cta-popup-badge">
+                <Sparkles size={26} color="#0066ff" />
+              </div>
+              <h2 className="cta-popup-title">Turn Your Goal Into a Mission.</h2>
+              <div className="cta-popup-quote">
+                <p className="quote-heading">Tell HynaBiz.</p>
+                <p className="quote-text">Connect. Discover. Grow.</p>
+              </div>
+
+              <button
+                type="button"
+                className="primary-auth-button cta-popup-btn"
+                onClick={() => {
+                  setShowFinalCtaPopup(false)
+                  setPassword('')
+                  setConfirmPassword('')
+                  showToast('Welcome aboard! Starting your business journey.')
+                }}
+              >
+                <span>Get Started with HynaBiz</span>
+                <ArrowRight size={18} />
+              </button>
+
+              <p className="cta-popup-tagline">
+                Global • Intelligent • Connected
+              </p>
+            </div>
+          </div>
+        )}
+
         <div className="mobile-home-indicator">
           <div className="home-bar" />
         </div>

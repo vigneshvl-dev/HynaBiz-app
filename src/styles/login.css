@@ -61,6 +61,71 @@
 .auth-status-bar {
   background: #ffffff;
   color: #0f172a;
+  position: relative;
+  z-index: 250;
+}
+
+.mobile-home-indicator {
+  position: relative;
+  z-index: 250;
+}
+
+.cta-popup-overlay {
+  position: absolute;
+  top: 48px;
+  bottom: 24px;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 100;
+  background: rgba(15, 23, 42, 0.78);
+  -webkit-backdrop-filter: blur(24px);
+  backdrop-filter: blur(24px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 20px;
+  animation: overlayFadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.cta-popup-card {
+  position: relative;
+  width: 100%;
+  max-width: 320px;
+  background: #ffffff;
+  border-radius: 28px;
+  padding: 28px 20px 22px 20px;
+  text-align: center;
+  box-shadow: 0 24px 60px rgba(0, 30, 90, 0.28);
+  border: 1.5px solid rgba(255, 255, 255, 0.9);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: popupScaleUp 0.38s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.cta-popup-close-btn {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #f1f5f9;
+  border: none;
+  color: #64748b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.22s ease;
+  z-index: 15;
+}
+
+.cta-popup-close-btn:hover {
+  background: #e2e8f0;
+  color: #0f172a;
+  transform: scale(1.08);
 }
 
 .auth-status-bar .battery-icon {
@@ -1188,35 +1253,6 @@
   animation: taglineFade 0.5s ease 0.65s forwards;
 }
 
-/* --- Final CTA Overlay & Modal --- */
-.cta-popup-overlay {
-  position: absolute;
-  inset: 0;
-  z-index: 90;
-  background: rgba(15, 23, 42, 0.68);
-  backdrop-filter: blur(10px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  animation: overlayFadeIn 0.3s ease forwards;
-}
-
-.cta-popup-card {
-  width: 100%;
-  max-width: 320px;
-  background: #ffffff;
-  border-radius: 28px;
-  padding: 26px 20px;
-  text-align: center;
-  box-shadow: 0 24px 60px rgba(0, 30, 90, 0.28);
-  border: 1.5px solid rgba(255, 255, 255, 0.9);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  animation: popupScaleUp 0.38s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-}
-
 .cta-popup-badge {
   width: 54px;
   height: 54px;
@@ -1281,6 +1317,16 @@
 .cta-popup-btn {
   gap: 8px;
   margin-bottom: 12px;
+}
+
+.cta-popup-tagline {
+  font-family: var(--font-display);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-top: 2px;
+  margin-bottom: 4px;
+  letter-spacing: 0.01em;
 }
 
 .cta-popup-small {
