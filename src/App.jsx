@@ -45,6 +45,7 @@ function App() {
       <main className="app-container">
         <Routes location={location} key={location.key}>
           <Route path="/" element={<Loading />} />
+          <Route path="/splash" element={<Loading />} />
           <Route path="/login" element={<Login />} />
 
           {/* Owner Platform Core Routes */}

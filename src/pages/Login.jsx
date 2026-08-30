@@ -117,26 +117,11 @@ const SUBROLE_GOALS = {
   ]
 }
 
-const FEATURES_STACK = [
-  { label: 'Earn', title: 'Earn', icon: '✨' },
-  { label: 'Spend', title: 'Spend', icon: '💳' },
-  { label: 'Invest', title: 'Invest', icon: '📈' }
-]
-
 export default function Login() {
   const navigate = useNavigate()
   const [toastMessage, setToastMessage] = useState('')
   const [toastVisible, setToastVisible] = useState(false)
-  const [introStage, setIntroStage] = useState('welcome')
-  const [activeFeatureIndex, setActiveFeatureIndex] = useState(1)
   const [pageStage, setPageStage] = useState('entering')
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setActiveFeatureIndex((prev) => (prev + 1) % FEATURES_STACK.length)
-    }, 2500)
-    return () => clearInterval(timer)
-  }, [])
   const [authMode, setAuthMode] = useState('signup')
   const [emailOrPhone, setEmailOrPhone] = useState('')
   const [password, setPassword] = useState('')
@@ -233,241 +218,127 @@ export default function Login() {
         </div>
 
         <div className="auth-viewport">
-          {introStage === 'welcome' ? (
-            <div className="onboarding-welcome-view white-above-blue-theme">
-              {/* White Top Hero Area */}
-              <div className="welcome-hero-white-top">
-                {/* Top Brand Header */}
-                <div className="welcome-brand-header-top">
-                  <Logo className="welcome-logo-img" />
-                  <span className="welcome-brand-text">
-                    Hyna<span className="welcome-brand-accent">Biz</span>
-                  </span>
-                </div>
+          <div className="auth-top-illustration-section">
+            <AuthIllustration />
+          </div>
 
-
-
-                {/* Vertical Feature Stack (Matching Image 2: Earn, Spend, Invest) */}
-                <div className="vertical-feature-stack">
-                  {FEATURES_STACK.map((item, idx) => {
-                    const isActive = idx === activeFeatureIndex
-                    return (
-                      <div
-                        key={item.label}
-                        className={`feature-stack-row ${isActive ? 'active' : 'muted'}`}
-                        onClick={() => setActiveFeatureIndex(idx)}
-                      >
-                        {isActive ? (
-                          <div className="feature-active-pill">
-                            <span className="feature-pill-icon">{item.icon}</span>
-                            <span className="feature-pill-title">{item.title}</span>
-                          </div>
-                        ) : (
-                          <span className="feature-muted-label">{item.label}</span>
-                        )}
-                      </div>
-                    )
-                  })}
-                </div>
-              </div>
-
-              {/* Blue Bottom Section */}
-              <div className="welcome-content-blue-bottom">
-                <div className="blue-bottom-gradient-bg" />
-
-                {/* Title Section */}
-                <div className="welcome-text-content z-index-2">
-                  <h2 className="welcome-headline-white">
-                    Manage Better. Grow Bigger.
-                    <br />
-                    <span className="welcome-headline-sub-cyan">Anytime, anywhere</span>
-                  </h2>
-                </div>
-
-                {/* Action Buttons */}
-                <div className="welcome-action-buttons z-index-2">
-                  <button
-                    type="button"
-                    className="btn-get-started-white"
-                    onClick={() => {
-                      setAuthMode('signup')
-                      setIntroStage('done')
-                    }}
-                  >
-                    Get Started
-                  </button>
-                  <button
-                    type="button"
-                    className="btn-already-account-glass"
-                    onClick={() => {
-                      setAuthMode('login')
-                      setIntroStage('done')
-                    }}
-                  >
-                    I already have an account
-                  </button>
-                </div>
-
-                {/* Terms Footer */}
-                <div className="welcome-terms-footer-light z-index-2">
-                  By continuing you agree to our{' '}
-                  <a
-                    href="#terms"
-                    onClick={(e) => {
-                      e.preventDefault()
-                      showToast('Terms of Services page')
-                    }}
-                  >
-                    Terms of Services
-                  </a>{' '}
-                  and{' '}
-                  <a
-                    href="#privacy"
-                    onClick={(e) => {
-                      e.preventDefault()
-                      showToast('Privacy Policy page')
-                    }}
-                  >
-                    Privacy Policy
-                  </a>
-                </div>
-              </div>
+          <div className="auth-bottom-sheet">
+            <div className="auth-header-group">
+              <h1 className="auth-title">
+                Welcome to <span className="auth-title-gradient"><span className="brand-hyna-inline">HYNA</span><span className="brand-biz-inline">BIZ</span></span>
+              </h1>
+              <p className="auth-subtitle">
+                {authMode === 'login' ? 'Login to continue your journey' : 'Sign up to access your business'}
+              </p>
             </div>
-          ) : (
-            <>
-              <div className="form-back-bar">
+
+            <div className="auth-mode-toggle-container">
+              <div className="auth-mode-toggle" role="tablist">
                 <button
                   type="button"
-                  className="form-back-button"
-                  onClick={() => setIntroStage('welcome')}
+                  role="tab"
+                  aria-selected={authMode === 'signup'}
+                  className={`mode-toggle-btn ${authMode === 'signup' ? 'active' : ''}`}
+                  onClick={() => setAuthMode('signup')}
                 >
-                  <ChevronLeft size={18} /> Back
+                  Sign Up
+                </button>
+                <button
+                  type="button"
+                  role="tab"
+                  aria-selected={authMode === 'login'}
+                  className={`mode-toggle-btn ${authMode === 'login' ? 'active' : ''}`}
+                  onClick={() => setAuthMode('login')}
+                >
+                  Login
+                </button>
+                <div className={`mode-toggle-pill ${authMode}`} />
+              </div>
+            </div>
+
+            <SocialLogin onSocialClick={handleSocialLogin} />
+            <Divider text="Or" />
+
+            <form onSubmit={handleMainSubmit} className="auth-input-form">
+              <div className="input-field-wrapper">
+                <span className="input-icon">
+                  <Mail size={18} />
+                </span>
+                <input
+                  type="text"
+                  placeholder="Email or Phone Number"
+                  value={emailOrPhone}
+                  onChange={(e) => setEmailOrPhone(e.target.value)}
+                  className="auth-input"
+                />
+              </div>
+
+              <div className="input-field-wrapper">
+                <span className="input-icon">
+                  <Lock size={18} />
+                </span>
+                <input
+                  type={showPassword ? 'text' : 'password'}
+                  placeholder={authMode === 'login' ? 'Password' : 'Create Password'}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="auth-input"
+                />
+                <button
+                  type="button"
+                  className="password-toggle-btn"
+                  onClick={() => setShowPassword(!showPassword)}
+                  tabIndex="-1"
+                  aria-label={showPassword ? 'Hide password' : 'Show password'}
+                >
+                  {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
                 </button>
               </div>
 
-              <div className="auth-top-illustration-section">
-                <AuthIllustration />
-              </div>
-
-              <div className="auth-bottom-sheet">
-                <div className="auth-header-group">
-                  <h1 className="auth-title">
-                    Welcome to <span className="auth-title-gradient"><span className="brand-hyna-inline">HYNA</span><span className="brand-biz-inline">BIZ</span></span>
-                  </h1>
-                  <p className="auth-subtitle">
-                    {authMode === 'login' ? 'Login to continue your journey' : 'Sign up to access your business'}
-                  </p>
-                </div>
-
-                <div className="auth-mode-toggle-container">
-                  <div className="auth-mode-toggle" role="tablist">
-                    <button
-                      type="button"
-                      role="tab"
-                      aria-selected={authMode === 'signup'}
-                      className={`mode-toggle-btn ${authMode === 'signup' ? 'active' : ''}`}
-                      onClick={() => setAuthMode('signup')}
-                    >
-                      Sign Up
-                    </button>
-                    <button
-                      type="button"
-                      role="tab"
-                      aria-selected={authMode === 'login'}
-                      className={`mode-toggle-btn ${authMode === 'login' ? 'active' : ''}`}
-                      onClick={() => setAuthMode('login')}
-                    >
-                      Login
-                    </button>
-                    <div className={`mode-toggle-pill ${authMode}`} />
-                  </div>
-                </div>
-
-                <SocialLogin onSocialClick={handleSocialLogin} />
-                <Divider text="Or" />
-
-                <form onSubmit={handleMainSubmit} className="auth-input-form">
-                  <div className="input-field-wrapper">
-                    <span className="input-icon">
-                      <Mail size={18} />
-                    </span>
-                    <input
-                      type="text"
-                      placeholder="Email or Phone Number"
-                      value={emailOrPhone}
-                      onChange={(e) => setEmailOrPhone(e.target.value)}
-                      className="auth-input"
-                    />
-                  </div>
-
-                  <div className="input-field-wrapper">
-                    <span className="input-icon">
-                      <Lock size={18} />
-                    </span>
-                    <input
-                      type={showPassword ? 'text' : 'password'}
-                      placeholder={authMode === 'login' ? 'Password' : 'Create Password'}
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      className="auth-input"
-                    />
-                    <button
-                      type="button"
-                      className="password-toggle-btn"
-                      onClick={() => setShowPassword(!showPassword)}
-                      tabIndex="-1"
-                      aria-label={showPassword ? 'Hide password' : 'Show password'}
-                    >
-                      {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
-                    </button>
-                  </div>
-
-                  {authMode === 'signup' && (
-                    <div className="input-field-wrapper">
-                      <span className="input-icon">
-                        <Lock size={18} />
-                      </span>
-                      <input
-                        type={showConfirmPassword ? 'text' : 'password'}
-                        placeholder="Confirm Password"
-                        value={confirmPassword}
-                        onChange={(e) => setConfirmPassword(e.target.value)}
-                        className="auth-input"
-                      />
-                      <button
-                        type="button"
-                        className="password-toggle-btn"
-                        onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                        tabIndex="-1"
-                        aria-label={showConfirmPassword ? 'Hide password' : 'Show password'}
-                      >
-                        {showConfirmPassword ? <EyeOff size={16} /> : <Eye size={16} />}
-                      </button>
-                    </div>
-                  )}
-
-                  <div className="auth-actions-group">
-                    <PrimaryButton type="submit" onClick={handleMainSubmit}>
-                      {authMode === 'login' ? 'Login' : 'Sign Up'}
-                    </PrimaryButton>
-                  </div>
-                </form>
-
-                <div className="auth-switch-footer">
-                  <span className="switch-text">
-                    {authMode === 'login' ? "Don't have an account?" : 'Already have an account?'}
+              {authMode === 'signup' && (
+                <div className="input-field-wrapper">
+                  <span className="input-icon">
+                    <Lock size={18} />
                   </span>
+                  <input
+                    type={showConfirmPassword ? 'text' : 'password'}
+                    placeholder="Confirm Password"
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    className="auth-input"
+                  />
                   <button
                     type="button"
-                    className="switch-link-btn"
-                    onClick={() => setAuthMode(authMode === 'login' ? 'signup' : 'login')}
+                    className="password-toggle-btn"
+                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                    tabIndex="-1"
+                    aria-label={showConfirmPassword ? 'Hide password' : 'Show password'}
                   >
-                    {authMode === 'login' ? 'Sign Up' : 'Login'}
+                    {showConfirmPassword ? <EyeOff size={16} /> : <Eye size={16} />}
                   </button>
                 </div>
+              )}
+
+              <div className="auth-actions-group">
+                <PrimaryButton type="submit" onClick={handleMainSubmit}>
+                  {authMode === 'login' ? 'Login' : 'Sign Up'}
+                </PrimaryButton>
               </div>
-            </>
-          )}
+            </form>
+
+            <div className="auth-switch-footer">
+              <span className="switch-text">
+                {authMode === 'login' ? "Don't have an account?" : 'Already have an account?'}
+              </span>
+              <button
+                type="button"
+                className="switch-link-btn"
+                onClick={() => setAuthMode(authMode === 'login' ? 'signup' : 'login')}
+              >
+                {authMode === 'login' ? 'Sign Up' : 'Login'}
+              </button>
+            </div>
+          </div>
 
           <Toast
             message={toastMessage}
@@ -553,60 +424,10 @@ export default function Login() {
                           <Store size={24} color="#0066ff" />
                         </div>
                         <div className="role-info">
-                          <h3 className="role-category-name">1. Business</h3>
+                          <h3 className="role-category-name">Business</h3>
                           <p className="role-category-desc">Trade, supply &amp; commercial entities</p>
                         </div>
                         <ChevronRight size={18} color="#94a3b8" style={{ marginLeft: 'auto', flexShrink: 0 }} />
-                      </div>
-                    </div>
-
-                    {/* 2. PROFESSIONAL */}
-                    <div
-                      className={`role-card category-professional ${selectedCategory === 'PROFESSIONAL' ? 'selected' : ''}`}
-                      onClick={() => {
-                        setSelectedCategory('PROFESSIONAL')
-                        setSelectedSubRole('Tech Expert')
-                      }}
-                    >
-                      <div className="role-card-header">
-                        <div className="role-icon-box pro-icon-bg">
-                          <UserCheck size={24} color="#10b981" />
-                        </div>
-                        <div className="role-info">
-                          <h3 className="role-category-name">2. Professional</h3>
-                          <p className="role-category-desc">Consultants, experts &amp; specialists</p>
-                        </div>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginLeft: 'auto' }}>
-                          {selectedCategory === 'PROFESSIONAL' && (
-                            <div className="role-check-badge"><Check size={14} color="#ffffff" /></div>
-                          )}
-                          <ChevronRight size={18} color="#94a3b8" />
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* 3. INVESTOR */}
-                    <div
-                      className={`role-card category-investor ${selectedCategory === 'INVESTOR' ? 'selected' : ''}`}
-                      onClick={() => {
-                        setSelectedCategory('INVESTOR')
-                        setSelectedSubRole('Startup')
-                      }}
-                    >
-                      <div className="role-card-header">
-                        <div className="role-icon-box investor-icon-bg">
-                          <TrendingUp size={24} color="#a855f7" />
-                        </div>
-                        <div className="role-info">
-                          <h3 className="role-category-name">3. Investor</h3>
-                          <p className="role-category-desc">Venture capital &amp; financial partners</p>
-                        </div>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginLeft: 'auto' }}>
-                          {selectedCategory === 'INVESTOR' && (
-                            <div className="role-check-badge"><Check size={14} color="#ffffff" /></div>
-                          )}
-                          <ChevronRight size={18} color="#94a3b8" />
-                        </div>
                       </div>
                     </div>
                   </div>
