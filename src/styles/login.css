@@ -1615,14 +1615,18 @@
 
 /* ── Step 2: Sub-role Big Cards ── */
 .subroles-grid-5-full {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 10px;
   margin-bottom: 4px;
 }
 
 .subrole-big-card {
   position: relative;
+  flex: 0 0 calc(33.333% - 8px);
+  max-width: calc(33.333% - 8px);
+  min-width: 0;
   background: #ffffff;
   border: 1.5px solid #e8edf5;
   border-radius: 18px;
@@ -1651,9 +1655,9 @@
 }
 
 .subrole-big-icon {
-  width: 50px;
-  height: 50px;
-  border-radius: 16px;
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
