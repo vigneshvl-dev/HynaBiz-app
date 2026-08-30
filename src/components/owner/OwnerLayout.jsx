@@ -1,5 +1,6 @@
 import React from 'react'
 import { useOwner } from '../../context/OwnerContext'
+import hynabizLogo from '../../assets/hynabiz-logo-removebg-preview.png'
 
 export default function OwnerLayout({ children }) {
   const { ownerProfile } = useOwner()
@@ -9,11 +10,11 @@ export default function OwnerLayout({ children }) {
       {/* Sidebar Navigation */}
       <aside className="owner-sidebar">
         <div className="sidebar-header">
-          <div className="sidebar-logo-icon">H</div>
-          <div>
-            <h1 className="sidebar-brand-title">HynaBiz</h1>
-            <span style={{ fontSize: '0.68rem', color: '#00d2ff', fontWeight: 800 }}>OWNER ENTERPRISE</span>
-          </div>
+          <img
+            src={hynabizLogo}
+            alt="HynaBiz"
+            style={{ width: '120px', objectFit: 'contain', display: 'block' }}
+          />
         </div>
 
         <nav className="sidebar-nav-list" style={{ overflowY: 'auto', paddingRight: '4px' }}>
