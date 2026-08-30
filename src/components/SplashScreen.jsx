@@ -1,5 +1,6 @@
 import React from 'react'
 import Logo from './Logo'
+import HandwrittenTitle from './HandwrittenTitle'
 
 export default function SplashScreen() {
   return (
@@ -53,13 +54,9 @@ export default function SplashScreen() {
               </div>
             </div>
 
-            {/* Brand Identity: App Name & Tagline */}
+            {/* Brand Identity: Handwriting Reveal + Cursor + Glow + Shimmer + Tagline */}
             <div className="brand-identity">
-              <div className="app-title-wrapper">
-                <h1 className="app-title brand-title">
-                  <span className="brand-hyna">Hyna</span><span className="brand-biz">Biz</span>
-                </h1>
-              </div>
+              <HandwrittenTitle />
             </div>
 
           </div>

@@ -2,98 +2,71 @@ import React, { createContext, useContext, useState } from 'react'
 import {
   INITIAL_OWNER_PROFILE,
   INITIAL_BUSINESS_PROFILE,
-  INITIAL_PRODUCTS,
-  INITIAL_SERVICES,
-  MOCK_OPPORTUNITIES,
-  MOCK_CONNECTIONS,
-  MOCK_MISSIONS,
+  DASHBOARD_OVERVIEW_METRICS,
   MOCK_REQUIREMENTS,
+  MOCK_OFFERS,
+  MOCK_DISCOVERY_BUSINESSES,
+  MOCK_AI_RECOMMENDATIONS,
+  MOCK_WHO_CAN_HELP,
+  MOCK_SPEED_NETWORKING_SESSIONS,
+  MOCK_CONNECTIONS,
+  MOCK_INTRODUCTIONS,
+  MOCK_LEADS_CRM,
   MOCK_MESSAGES,
-  MOCK_MEETINGS
+  MOCK_MEETINGS,
+  MOCK_PRODUCTS,
+  MOCK_SERVICES,
+  MOCK_MARKETPLACE_ITEMS,
+  MOCK_QUOTATIONS,
+  MOCK_DEALS,
+  MOCK_PAYMENTS,
+  MOCK_REPUTATION,
+  MOCK_ANALYTICS,
+  MOCK_POSTS,
+  MOCK_TEAM_MEMBERS,
+  MOCK_EXPANSION_PLANS,
+  MOCK_NOTIFICATIONS,
+  MOCK_SUBSCRIPTION
 } from '../data/mockOwnerData'
 
 const OwnerContext = createContext()
 
 export function OwnerProvider({ children }) {
   const [onboardingStep, setOnboardingStep] = useState(1)
-  const [onboardingCompleted, setOnboardingCompleted] = useState(false)
+  const [onboardingCompleted, setOnboardingCompleted] = useState(true)
 
-  // Step 1: Owner Profile
+  // Profiles
   const [ownerProfile, setOwnerProfile] = useState(INITIAL_OWNER_PROFILE)
-
-  // Step 2: Business Profile
   const [businessProfile, setBusinessProfile] = useState(INITIAL_BUSINESS_PROFILE)
+  const [dashboardMetrics, setDashboardMetrics] = useState(DASHBOARD_OVERVIEW_METRICS)
 
-  // Step 3: Products & Services
-  const [products, setProducts] = useState(INITIAL_PRODUCTS)
-  const [services, setServices] = useState(INITIAL_SERVICES)
-
-  // Step 4: What Can You Offer
-  const [whatCanOffer, setWhatCanOffer] = useState(['Products', 'Manufacturing', 'Logistics', 'Consulting'])
-
-  // Step 5: What Are You Looking For
-  const [whatLookingFor, setWhatLookingFor] = useState(['Buyers', 'Distributors', 'International Partners'])
-
-  // Step 6: Business Goals
-  const [businessGoals, setBusinessGoals] = useState(['Find Distributors', 'Enter New Markets', 'Expand Internationally'])
-  const [goalDetailText, setGoalDetailText] = useState('I want to expand my packaging business into the UAE and GCC region.')
-
-  // Step 7: Target Markets
-  const [marketScope, setMarketScope] = useState('International')
-  const [targetCountries, setTargetCountries] = useState(['India', 'United Arab Emirates', 'United States', 'Singapore'])
-
-  // Step 8: Business Intent
-  const [businessIntentText, setBusinessIntentText] = useState('I manufacture eco-friendly biodegradable packaging and I am looking for exclusive commercial distributors in Dubai and UAE.')
-  const [aiIntentAnalysis, setAiIntentAnalysis] = useState({
-    need: 'Distributor',
-    industry: 'Packaging & Manufacturing',
-    targetMarket: 'Dubai, UAE',
-    goal: 'International Expansion',
-    intentLevel: 'High (96% Confidence)',
-  })
-
-  // Step 9: Verification Statuses
-  const [verification, setVerification] = useState({
-    email: 'Verified',
-    phone: 'Verified',
-    business: 'Verified',
-    website: 'Verified',
-    registration: 'Pending',
-  })
-
-  // Core Owner Platform Lists
-  const [opportunities, setOpportunities] = useState(MOCK_OPPORTUNITIES)
-  const [connections, setConnections] = useState(MOCK_CONNECTIONS)
-  const [missions, setMissions] = useState(MOCK_MISSIONS)
+  // Core Platform Hub Datasets
   const [requirements, setRequirements] = useState(MOCK_REQUIREMENTS)
+  const [offers, setOffers] = useState(MOCK_OFFERS)
+  const [discoveryBusinesses, setDiscoveryBusinesses] = useState(MOCK_DISCOVERY_BUSINESSES)
+  const [aiMatches, setAiMatches] = useState(MOCK_AI_RECOMMENDATIONS)
+  const [whoCanHelpPosts, setWhoCanHelpPosts] = useState(MOCK_WHO_CAN_HELP)
+  const [speedSessions, setSpeedSessions] = useState(MOCK_SPEED_NETWORKING_SESSIONS)
+  const [connections, setConnections] = useState(MOCK_CONNECTIONS)
+  const [introductions, setIntroductions] = useState(MOCK_INTRODUCTIONS)
+  const [leadsCRM, setLeadsCRM] = useState(MOCK_LEADS_CRM)
   const [messages, setMessages] = useState(MOCK_MESSAGES)
   const [meetings, setMeetings] = useState(MOCK_MEETINGS)
+  const [products, setProducts] = useState(MOCK_PRODUCTS)
+  const [services, setServices] = useState(MOCK_SERVICES)
+  const [marketplaceItems, setMarketplaceItems] = useState(MOCK_MARKETPLACE_ITEMS)
+  const [quotations, setQuotations] = useState(MOCK_QUOTATIONS)
+  const [deals, setDeals] = useState(MOCK_DEALS)
+  const [payments, setPayments] = useState(MOCK_PAYMENTS)
+  const [reputation, setReputation] = useState(MOCK_REPUTATION)
+  const [analytics, setAnalytics] = useState(MOCK_ANALYTICS)
+  const [posts, setPosts] = useState(MOCK_POSTS)
+  const [teamMembers, setTeamMembers] = useState(MOCK_TEAM_MEMBERS)
+  const [expansionPlans, setExpansionPlans] = useState(MOCK_EXPANSION_PLANS)
+  const [notifications, setNotifications] = useState(MOCK_NOTIFICATIONS)
+  const [subscription, setSubscription] = useState(MOCK_SUBSCRIPTION)
 
   // Actions
-  const addProduct = (newProd) => {
-    setProducts((prev) => [...prev, { ...newProd, id: `prod-${Date.now()}` }])
-  }
-
-  const updateProduct = (id, updatedFields) => {
-    setProducts((prev) => prev.map((p) => (p.id === id ? { ...p, ...updatedFields } : p)))
-  }
-
-  const deleteProduct = (id) => {
-    setProducts((prev) => prev.filter((p) => p.id !== id))
-  }
-
-  const addService = (newServ) => {
-    setServices((prev) => [...prev, { ...newServ, id: `serv-${Date.now()}` }])
-  }
-
-  const updateService = (id, updatedFields) => {
-    setServices((prev) => prev.map((s) => (s.id === id ? { ...s, ...updatedFields } : s)))
-  }
-
-  const deleteService = (id) => {
-    setServices((prev) => prev.filter((s) => s.id !== id))
-  }
-
   const publishRequirement = (reqData) => {
     setRequirements((prev) => [
       {
@@ -105,38 +78,116 @@ export function OwnerProvider({ children }) {
     ])
   }
 
-  const addMission = (missionData) => {
-    setMissions((prev) => [
+  const publishOffer = (offerData) => {
+    setOffers((prev) => [
       {
-        ...missionData,
-        id: `mission-${Date.now()}`,
-        progress: 0,
+        ...offerData,
+        id: `off-${Date.now()}`,
       },
       ...prev,
     ])
   }
 
-  const toggleTaskCompleted = (missionId, taskId) => {
-    setMissions((prev) =>
-      prev.map((m) => {
-        if (m.id !== missionId) return m
-        const updatedTasks = m.tasks.map((t) => (t.id === taskId ? { ...t, completed: !t.completed } : t))
-        const completedCount = updatedTasks.filter((t) => t.completed).length
-        const progress = Math.round((completedCount / updatedTasks.length) * 100)
-        return { ...m, tasks: updatedTasks, progress }
-      })
+  const createQuotation = (quoteData) => {
+    setQuotations((prev) => [
+      {
+        ...quoteData,
+        id: `quote-${Date.now()}`,
+        quotationNumber: `QT-2026-${Math.floor(100 + Math.random() * 900)}`,
+        status: 'Sent / Pending Approval',
+      },
+      ...prev,
+    ])
+  }
+
+  const updateLeadStage = (leadId, newStage) => {
+    setLeadsCRM((prev) =>
+      prev.map((l) => (l.id === leadId ? { ...l, stage: newStage } : l))
     )
   }
 
-  const sendConnectionRequest = (connData) => {
-    setConnections((prev) => [
+  const addLead = (leadData) => {
+    setLeadsCRM((prev) => [
       {
-        ...connData,
-        id: `conn-${Date.now()}`,
-        status: 'Pending',
+        ...leadData,
+        id: `lead-${Date.now()}`,
+        stage: 'New',
+        lastContact: 'Just now',
       },
       ...prev,
     ])
+  }
+
+  const createHelpPost = (postData) => {
+    setWhoCanHelpPosts((prev) => [
+      {
+        ...postData,
+        id: `help-${Date.now()}`,
+        author: ownerProfile.fullName,
+        company: businessProfile.name,
+        avatarUrl: ownerProfile.avatarUrl,
+        repliesCount: 0,
+        timeAgo: 'Just now',
+        replies: [],
+      },
+      ...prev,
+    ])
+  }
+
+  const addPost = (postText, type = 'Business Update') => {
+    setPosts((prev) => [
+      {
+        id: `post-${Date.now()}`,
+        author: ownerProfile.fullName,
+        company: businessProfile.name,
+        avatarUrl: ownerProfile.avatarUrl,
+        type,
+        content: postText,
+        likes: 0,
+        comments: 0,
+        timeAgo: 'Just now',
+      },
+      ...prev,
+    ])
+  }
+
+  const inviteTeamMember = (memberData) => {
+    setTeamMembers((prev) => [
+      {
+        ...memberData,
+        id: `tm-${Date.now()}`,
+        status: 'Active',
+      },
+      ...prev,
+    ])
+  }
+
+  const addProduct = (prodData) => {
+    setProducts((prev) => [
+      {
+        ...prodData,
+        id: `prod-${Date.now()}`,
+      },
+      ...prev,
+    ])
+  }
+
+  const deleteProduct = (id) => {
+    setProducts((prev) => prev.filter((p) => p.id !== id))
+  }
+
+  const addService = (servData) => {
+    setServices((prev) => [
+      {
+        ...servData,
+        id: `serv-${Date.now()}`,
+      },
+      ...prev,
+    ])
+  }
+
+  const deleteService = (id) => {
+    setServices((prev) => prev.filter((s) => s.id !== id))
   }
 
   const sendMessageToChat = (chatId, text) => {
@@ -165,49 +216,44 @@ export function OwnerProvider({ children }) {
         setOwnerProfile,
         businessProfile,
         setBusinessProfile,
-        products,
-        services,
-        addProduct,
-        updateProduct,
-        deleteProduct,
-        addService,
-        updateService,
-        deleteService,
-        whatCanOffer,
-        setWhatCanOffer,
-        whatLookingFor,
-        setWhatLookingFor,
-        businessGoals,
-        setBusinessGoals,
-        goalDetailText,
-        setGoalDetailText,
-        marketScope,
-        setMarketScope,
-        targetCountries,
-        setTargetCountries,
-        businessIntentText,
-        setBusinessIntentText,
-        aiIntentAnalysis,
-        setAiIntentAnalysis,
-        verification,
-        setVerification,
-        opportunities,
-        setOpportunities,
-        connections,
-        setConnections,
-        sendConnectionRequest,
-        missions,
-        setMissions,
-        addMission,
-        toggleTaskCompleted,
+        dashboardMetrics,
         requirements,
-        setRequirements,
         publishRequirement,
+        offers,
+        publishOffer,
+        discoveryBusinesses,
+        aiMatches,
+        whoCanHelpPosts,
+        createHelpPost,
+        speedSessions,
+        connections,
+        introductions,
+        leadsCRM,
+        updateLeadStage,
+        addLead,
         messages,
-        setMessages,
         sendMessageToChat,
         meetings,
-        setMeetings,
+        products,
+        addProduct,
+        deleteProduct,
+        services,
+        addService,
+        deleteService,
+        marketplaceItems,
+        quotations,
+        createQuotation,
+        deals,
+        payments,
+        reputation,
+        analytics,
+        posts,
+        addPost,
+        teamMembers,
+        inviteTeamMember,
+        expansionPlans,
+        notifications,
+        subscription,
       }}
     >
       {children}

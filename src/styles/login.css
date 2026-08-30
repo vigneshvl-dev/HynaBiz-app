@@ -1434,176 +1434,380 @@
 /* ==========================================================================
    Role Selection Onboarding Card Styles
    ========================================================================== */
+/* ════════════════════════════════════════════
+   ROLE SELECTION MODAL — PREMIUM REDESIGN
+   ════════════════════════════════════════════ */
+
 .role-selection-card {
-  max-width: 345px !important;
+  max-width: 390px !important;
   max-height: calc(100% - 20px);
   overflow-y: auto;
-  padding: 22px 18px 18px 18px !important;
+  padding: 28px 20px 22px !important;
   scrollbar-width: none;
+  border-radius: 32px !important;
+  background: linear-gradient(160deg, #ffffff 0%, #f8faff 100%) !important;
+  border: 1px solid rgba(0, 102, 255, 0.1) !important;
+  box-shadow: 0 32px 64px rgba(0, 0, 0, 0.12), 0 8px 24px rgba(0, 102, 255, 0.06) !important;
 }
 
 .role-selection-card::-webkit-scrollbar {
   display: none;
 }
 
+/* ── Header ── */
 .role-header {
   margin-top: 4px;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
   text-align: center;
 }
 
 .role-title {
   font-family: var(--font-display);
-  font-size: 1.2rem;
+  font-size: 1.45rem;
   font-weight: 800;
   color: #0f172a;
-  margin-bottom: 3px;
+  margin-bottom: 6px;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
 }
 
 .role-subtitle {
   font-family: var(--font-body);
-  font-size: 0.78rem;
+  font-size: 0.82rem;
   font-weight: 500;
-  color: #64748b;
+  color: #94a3b8;
   margin: 0;
+  line-height: 1.45;
 }
 
+/* ── Step 1: Category Grid ── */
 .role-options-grid {
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: 10px;
-  margin-bottom: 16px;
+  margin-bottom: 18px;
 }
 
 .role-card {
+  position: relative;
   width: 100%;
-  background: #f8fafc;
-  border: 1.5px solid #e2e8f0;
-  border-radius: 16px;
-  padding: 12px 14px;
+  background: #ffffff;
+  border: 1.5px solid #e8edf5;
+  border-radius: 20px;
+  padding: 16px 18px;
   cursor: pointer;
-  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
   text-align: left;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
 .role-card:hover {
-  background: #ffffff;
   border-color: #93c5fd;
-  transform: translateY(-1.5px);
-  box-shadow: 0 6px 16px rgba(0, 102, 255, 0.08);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(0, 102, 255, 0.10);
+  background: #fafcff;
 }
 
 .role-card.selected {
-  background: linear-gradient(135deg, #ffffff 0%, #eff6ff 100%);
+  background: linear-gradient(135deg, #f0f6ff 0%, #e8f0ff 100%);
   border-color: #0066ff;
-  box-shadow: 0 0 0 2px rgba(0, 102, 255, 0.15), 0 8px 20px rgba(0, 102, 255, 0.12);
+  box-shadow: 0 8px 28px rgba(0, 102, 255, 0.15);
+}
+
+.role-card.category-professional.selected {
+  background: linear-gradient(135deg, #f0fdf8 0%, #dcfaee 100%);
+  border-color: #10b981;
+  box-shadow: 0 8px 28px rgba(16, 185, 129, 0.15);
+}
+
+.role-card.category-investor.selected {
+  background: linear-gradient(135deg, #fdf5ff 0%, #f3e8ff 100%);
+  border-color: #a855f7;
+  box-shadow: 0 8px 28px rgba(168, 85, 247, 0.15);
+}
+
+/* "Most common" badge — floats above the card */
+.most-common-badge {
+  position: absolute;
+  top: -12px;
+  left: 70px;
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: #0066ff;
+  background: linear-gradient(90deg, #dbeafe, #eff6ff);
+  border: 1px solid #93c5fd;
+  padding: 3px 10px;
+  border-radius: 999px;
+  box-shadow: 0 2px 8px rgba(0, 102, 255, 0.18);
 }
 
 .role-card-header {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
 }
 
 .role-icon-box {
-  width: 38px;
-  height: 38px;
-  border-radius: 12px;
-  background: #ffffff;
-  border: 1px solid #dbeafe;
+  width: 48px;
+  height: 48px;
+  border-radius: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 2px 6px rgba(0, 102, 255, 0.08);
   flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: transform 0.22s ease;
+}
+
+.role-card:hover .role-icon-box {
+  transform: scale(1.08);
+}
+
+.business-icon-bg {
+  background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+}
+
+.pro-icon-bg {
+  background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+}
+
+.investor-icon-bg {
+  background: linear-gradient(135deg, #f3e8ff, #e9d5ff);
 }
 
 .role-info {
   flex: 1;
+  min-width: 0;
 }
 
 .role-category-name {
   font-family: var(--font-display);
-  font-size: 0.88rem;
+  font-size: 1.02rem;
   font-weight: 800;
   color: #0f172a;
   margin: 0;
-  letter-spacing: 0.02em;
+  letter-spacing: -0.01em;
 }
 
 .role-category-desc {
   font-family: var(--font-body);
-  font-size: 0.74rem;
-  color: #64748b;
-  margin: 1px 0 0 0;
+  font-size: 0.76rem;
+  color: #94a3b8;
+  margin: 3px 0 0 0;
+  font-weight: 500;
 }
 
 .role-check-badge {
-  width: 22px;
-  height: 22px;
+  width: 26px;
+  height: 26px;
   border-radius: 50%;
-  background: #0066ff;
+  background: linear-gradient(135deg, #0066ff, #0ea5e9);
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 2px 6px rgba(0, 102, 255, 0.3);
+  box-shadow: 0 4px 10px rgba(0, 102, 255, 0.35);
   flex-shrink: 0;
 }
 
+/* ── Step 2: Sub-role Big Cards ── */
+.subroles-grid-5-full {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  margin-bottom: 4px;
+}
+
+.subrole-big-card {
+  position: relative;
+  background: #ffffff;
+  border: 1.5px solid #e8edf5;
+  border-radius: 18px;
+  padding: 14px 6px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.26s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  outline: none;
+}
+
+.subrole-big-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.10);
+  border-color: #93c5fd;
+}
+
+.subrole-big-card.active {
+  border-color: transparent;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.16);
+}
+
+.subrole-big-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.26s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.10);
+}
+
+.subrole-big-card.active .subrole-big-icon {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.22);
+  transform: scale(1.06);
+}
+
+.subrole-big-text {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #334155;
+  text-align: center;
+  line-height: 1.2;
+}
+
+.subrole-big-card.active .subrole-big-text {
+  color: #0f172a;
+}
+
+.subrole-big-check {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #0066ff, #0ea5e9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 3px 8px rgba(0, 102, 255, 0.4);
+  animation: popIn 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes popIn {
+  from { transform: scale(0); opacity: 0; }
+  to   { transform: scale(1); opacity: 1; }
+}
+
+/* ── Sub-roles (inside card — not used in new flow) ── */
 .subroles-container {
-  margin-top: 10px;
-  padding-top: 10px;
+  margin-top: 14px;
+  padding-top: 12px;
   border-top: 1px dashed #cbd5e1;
 }
 
 .subroles-label {
   display: block;
   font-family: var(--font-body);
-  font-size: 0.7rem;
+  font-size: 0.78rem;
   font-weight: 700;
-  color: #0066ff;
-  margin-bottom: 6px;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
+  color: #0f172a;
+  margin-bottom: 8px;
 }
 
-.subroles-pills {
-  display: flex;
-  flex-wrap: wrap;
+.subroles-grid-5 {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
   gap: 6px;
 }
 
-.subrole-pill {
+.subrole-card-item {
   background: #ffffff;
-  border: 1px solid #cbd5e1;
-  border-radius: 20px;
-  padding: 4px 10px;
-  font-family: var(--font-body);
-  font-size: 0.74rem;
-  font-weight: 600;
-  color: #475569;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 8px 2px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
-.subrole-pill:hover {
+.subrole-card-item:hover {
   border-color: #0066ff;
-  color: #0066ff;
+  transform: translateY(-1px);
 }
 
-.subrole-pill.active {
+.subrole-card-item.active {
   background: #0066ff;
   border-color: #0066ff;
+  box-shadow: 0 4px 12px rgba(0, 102, 255, 0.3);
+}
+
+.subrole-icon-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.subrole-text {
+  font-family: var(--font-body);
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #334155;
+  text-align: center;
+}
+
+.subrole-card-item.active .subrole-text {
   color: #ffffff;
-  box-shadow: 0 2px 8px rgba(0, 102, 255, 0.3);
 }
 
+/* ── Continue Button ── */
 .role-submit-btn {
-  margin-bottom: 4px;
+  width: 100%;
+  padding: 15px;
+  border-radius: 16px;
+  font-size: 0.96rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  background: linear-gradient(135deg, #0066ff 0%, #0ea5e9 100%);
+  color: #ffffff;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.26s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 8px 24px rgba(0, 102, 255, 0.32);
 }
 
-/* --- Subrole Goals List Styles --- */
+.role-submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 32px rgba(0, 102, 255, 0.42);
+  background: linear-gradient(135deg, #0052cc 0%, #0284c7 100%);
+}
+
+.role-submit-btn:active {
+  transform: translateY(0px);
+}
+
+/* ── Security Footer ── */
+.popup-security-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 14px;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #94a3b8;
+}
+
+/* ── Goals List ── */
 .subrole-goals-box {
   margin-top: 10px;
   padding-top: 10px;

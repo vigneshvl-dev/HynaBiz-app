@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Mail, Lock, Eye, EyeOff, ArrowRight, Sparkles, X, Briefcase, UserCheck, TrendingUp, Check, Building2, CheckCircle2 } from 'lucide-react'
+import { Mail, Lock, Eye, EyeOff, ArrowRight, Sparkles, X, Briefcase, UserCheck, TrendingUp, Check, Building2, CheckCircle2, Store, ShoppingBag, Package, Truck, Factory, ChevronRight, ShieldCheck, User } from 'lucide-react'
 import AuthIllustration from '../components/AuthIllustration'
 import SocialLogin from '../components/SocialLogin'
 import Divider from '../components/Divider'
@@ -130,6 +130,7 @@ export default function Login() {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
   const [showFinalCtaPopup, setShowFinalCtaPopup] = useState(false)
   const [showRoleSelectionPopup, setShowRoleSelectionPopup] = useState(false)
+  const [roleStep, setRoleStep] = useState(1) // 1 = pick category, 2 = pick sub-role
   const [selectedCategory, setSelectedCategory] = useState('BUSINESS')
   const [selectedSubRole, setSelectedSubRole] = useState('Owner')
 
@@ -449,264 +450,193 @@ export default function Login() {
         {showRoleSelectionPopup && (
           <div className="cta-popup-overlay">
             <div className="cta-popup-card role-selection-card">
-              <button
-                type="button"
-                className="cta-popup-close-btn"
-                onClick={() => setShowRoleSelectionPopup(false)}
-                aria-label="Close role selection"
-              >
-                <X size={18} />
-              </button>
+              {/* ── STEP 1: Choose category ── */}
+              {roleStep === 1 && (
+                <>
+                  <button
+                    type="button"
+                    className="cta-popup-close-btn"
+                    onClick={() => setShowRoleSelectionPopup(false)}
+                    aria-label="Close role selection"
+                  >
+                    <X size={18} />
+                  </button>
 
-              <div className="role-header">
-                <h2 className="role-title">Select Your Business Role</h2>
-                <p className="role-subtitle">Tell us how you operate on HynaBiz</p>
-              </div>
-
-              <div className="role-options-grid">
-                {/* 1. BUSINESS Category */}
-                <div
-                  className={`role-card ${selectedCategory === 'BUSINESS' ? 'selected' : ''}`}
-                  onClick={() => setSelectedCategory('BUSINESS')}
-                >
-                  <div className="role-card-header">
-                    <div className="role-icon-box">
-                      <Building2 size={22} color="#0066ff" />
-                    </div>
-                    <div className="role-info">
-                      <h3 className="role-category-name">1. BUSINESS</h3>
-                      <p className="role-category-desc">Trade, supply &amp; commercial entities</p>
-                    </div>
-                    {selectedCategory === 'BUSINESS' && (
-                      <div className="role-check-badge">
-                        <Check size={14} color="#ffffff" />
-                      </div>
-                    )}
+                  <div className="role-header">
+                    <h2 className="role-title">Choose your business role</h2>
+                    <p className="role-subtitle">This helps us personalize your experience on HynaBiz.</p>
                   </div>
 
-                  {selectedCategory === 'BUSINESS' && (
-                    <div className="subroles-container">
-                      <span className="subroles-label">Select Sub-Role:</span>
-                      <div className="subroles-pills">
-                        {['Owner', 'Buyer', 'Supplier', 'Distributor', 'Manufacturer'].map((sub) => (
-                          <button
-                            key={sub}
-                            type="button"
-                            className={`subrole-pill ${selectedSubRole === sub ? 'active' : ''}`}
-                            onClick={(e) => {
-                              e.stopPropagation()
-                              setSelectedCategory('BUSINESS')
-                              setSelectedSubRole(sub)
-                            }}
+                  <div className="role-options-grid">
+                    {/* 1. BUSINESS */}
+                    <div
+                      className="role-card"
+                      onClick={() => {
+                        setSelectedCategory('BUSINESS')
+                        setRoleStep(2)
+                      }}
+                    >
+                      <div className="most-common-badge">Most common</div>
+                      <div className="role-card-header">
+                        <div className="role-icon-box business-icon-bg">
+                          <Store size={24} color="#0066ff" />
+                        </div>
+                        <div className="role-info">
+                          <h3 className="role-category-name">1. Business</h3>
+                          <p className="role-category-desc">Trade, supply &amp; commercial entities</p>
+                        </div>
+                        <ChevronRight size={18} color="#94a3b8" style={{ marginLeft: 'auto', flexShrink: 0 }} />
+                      </div>
+                    </div>
+
+                    {/* 2. PROFESSIONAL */}
+                    <div
+                      className={`role-card category-professional ${selectedCategory === 'PROFESSIONAL' ? 'selected' : ''}`}
+                      onClick={() => {
+                        setSelectedCategory('PROFESSIONAL')
+                        setSelectedSubRole('Tech Expert')
+                      }}
+                    >
+                      <div className="role-card-header">
+                        <div className="role-icon-box pro-icon-bg">
+                          <UserCheck size={24} color="#10b981" />
+                        </div>
+                        <div className="role-info">
+                          <h3 className="role-category-name">2. Professional</h3>
+                          <p className="role-category-desc">Consultants, experts &amp; specialists</p>
+                        </div>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginLeft: 'auto' }}>
+                          {selectedCategory === 'PROFESSIONAL' && (
+                            <div className="role-check-badge"><Check size={14} color="#ffffff" /></div>
+                          )}
+                          <ChevronRight size={18} color="#94a3b8" />
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* 3. INVESTOR */}
+                    <div
+                      className={`role-card category-investor ${selectedCategory === 'INVESTOR' ? 'selected' : ''}`}
+                      onClick={() => {
+                        setSelectedCategory('INVESTOR')
+                        setSelectedSubRole('Startup')
+                      }}
+                    >
+                      <div className="role-card-header">
+                        <div className="role-icon-box investor-icon-bg">
+                          <TrendingUp size={24} color="#a855f7" />
+                        </div>
+                        <div className="role-info">
+                          <h3 className="role-category-name">3. Investor</h3>
+                          <p className="role-category-desc">Venture capital &amp; financial partners</p>
+                        </div>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginLeft: 'auto' }}>
+                          {selectedCategory === 'INVESTOR' && (
+                            <div className="role-check-badge"><Check size={14} color="#ffffff" /></div>
+                          )}
+                          <ChevronRight size={18} color="#94a3b8" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <button
+                    type="button"
+                    className="primary-auth-button role-submit-btn"
+                    onClick={() => {
+                      setShowRoleSelectionPopup(false)
+                      const roleName = selectedSubRole ? `${selectedCategory} (${selectedSubRole})` : selectedCategory
+                      showToast(`Selected ${roleName}! Welcome to HynaBiz.`)
+                      if (selectedCategory === 'BUSINESS') {
+                        setTimeout(() => navigate('/owner/dashboard'), 400)
+                      }
+                    }}
+                  >
+                    <span>Continue to HynaBiz</span>
+                    <ArrowRight size={18} />
+                  </button>
+
+                  <div className="popup-security-footer">
+                    <ShieldCheck size={15} color="#0066ff" />
+                    <span>100% Secure • Your information is always protected</span>
+                  </div>
+                </>
+              )}
+
+              {/* ── STEP 2: Who are you? (Business sub-roles) ── */}
+              {roleStep === 2 && (
+                <>
+                  <button
+                    type="button"
+                    className="cta-popup-close-btn"
+                    onClick={() => setRoleStep(1)}
+                    aria-label="Back"
+                  >
+                    <ChevronRight size={18} style={{ transform: 'rotate(180deg)' }} />
+                  </button>
+
+                  <div className="role-header">
+                    <h2 className="role-title">Who are you?</h2>
+                    <p className="role-subtitle">Select your role inside the Business category.</p>
+                  </div>
+
+                  <div className="subroles-grid-5-full">
+                    {[
+                      { name: 'Owner', icon: User, color: '#0066ff', bg: '#eff6ff' },
+                      { name: 'Buyer', icon: ShoppingBag, color: '#10b981', bg: '#d1fae5' },
+                      { name: 'Supplier', icon: Package, color: '#f97316', bg: '#fff7ed' },
+                      { name: 'Distributor', icon: Truck, color: '#a855f7', bg: '#f3e8ff' },
+                      { name: 'Manufacturer', icon: Factory, color: '#ef4444', bg: '#fef2f2' },
+                    ].map((sub) => {
+                      const SubIcon = sub.icon
+                      const isActive = selectedSubRole === sub.name
+                      return (
+                        <button
+                          key={sub.name}
+                          type="button"
+                          className={`subrole-big-card ${isActive ? 'active' : ''}`}
+                          onClick={() => setSelectedSubRole(sub.name)}
+                        >
+                          <div
+                            className="subrole-big-icon"
+                            style={{ background: isActive ? sub.color : sub.bg }}
                           >
-                            {sub}
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                </div>
-
-                {/* 2. PROFESSIONAL Category */}
-                <div
-                  className={`role-card ${selectedCategory === 'PROFESSIONAL' ? 'selected' : ''}`}
-                  onClick={() => {
-                    setSelectedCategory('PROFESSIONAL')
-                    if (!['Tech Expert', 'Legal Expert', 'Finance Expert', 'Business Consultant', 'GTM', 'Marketing Developer', 'Design Agency'].includes(selectedSubRole)) {
-                      setSelectedSubRole('Tech Expert')
-                    }
-                  }}
-                >
-                  <div className="role-card-header">
-                    <div className="role-icon-box">
-                      <UserCheck size={22} color="#0066ff" />
-                    </div>
-                    <div className="role-info">
-                      <h3 className="role-category-name">2. PROFESSIONAL</h3>
-                      <p className="role-category-desc">Consultants, experts &amp; specialists</p>
-                    </div>
-                    {selectedCategory === 'PROFESSIONAL' && (
-                      <div className="role-check-badge">
-                        <Check size={14} color="#ffffff" />
-                      </div>
-                    )}
+                            <SubIcon size={28} color={isActive ? '#ffffff' : sub.color} />
+                          </div>
+                          <span className="subrole-big-text">{sub.name}</span>
+                          {isActive && (
+                            <div className="subrole-big-check">
+                              <Check size={12} color="#ffffff" />
+                            </div>
+                          )}
+                        </button>
+                      )
+                    })}
                   </div>
 
-                  {selectedCategory === 'PROFESSIONAL' && (
-                    <div className="subroles-container">
-                      <div className="subrole-group">
-                        <span className="subroles-label">1. EXPERT:</span>
-                        <div className="subroles-pills">
-                          {['Tech Expert', 'Legal Expert', 'Finance Expert'].map((sub) => (
-                            <button
-                              key={sub}
-                              type="button"
-                              className={`subrole-pill ${selectedSubRole === sub ? 'active' : ''}`}
-                              onClick={(e) => {
-                                e.stopPropagation()
-                                setSelectedCategory('PROFESSIONAL')
-                                setSelectedSubRole(sub)
-                              }}
-                            >
-                              {sub}
-                            </button>
-                          ))}
-                        </div>
-                      </div>
+                  <button
+                    type="button"
+                    className="primary-auth-button role-submit-btn"
+                    style={{ marginTop: '20px' }}
+                    onClick={() => {
+                      setShowRoleSelectionPopup(false)
+                      setRoleStep(1)
+                      showToast(`Welcome as ${selectedSubRole}! Let's go.`)
+                      if (selectedSubRole === 'Owner') {
+                        setTimeout(() => navigate('/owner/dashboard'), 400)
+                      }
+                    }}
+                  >
+                    <span>Continue as {selectedSubRole}</span>
+                    <ArrowRight size={18} />
+                  </button>
 
-                      <div className="subrole-group" style={{ marginTop: '8px' }}>
-                        <span className="subroles-label">2. CONSULTANT:</span>
-                        <div className="subroles-pills">
-                          {['Business Consultant', 'GTM'].map((sub) => (
-                            <button
-                              key={sub}
-                              type="button"
-                              className={`subrole-pill ${selectedSubRole === sub ? 'active' : ''}`}
-                              onClick={(e) => {
-                                e.stopPropagation()
-                                setSelectedCategory('PROFESSIONAL')
-                                setSelectedSubRole(sub)
-                              }}
-                            >
-                              {sub}
-                            </button>
-                          ))}
-                        </div>
-                      </div>
-
-                      <div className="subrole-group" style={{ marginTop: '8px' }}>
-                        <span className="subroles-label">3. SERVICE PROVIDER:</span>
-                        <div className="subroles-pills">
-                          {['Marketing Developer', 'Design Agency'].map((sub) => (
-                            <button
-                              key={sub}
-                              type="button"
-                              className={`subrole-pill ${selectedSubRole === sub ? 'active' : ''}`}
-                              onClick={(e) => {
-                                e.stopPropagation()
-                                setSelectedCategory('PROFESSIONAL')
-                                setSelectedSubRole(sub)
-                              }}
-                            >
-                              {sub}
-                            </button>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                </div>
-
-                {/* 3. INVESTOR Category */}
-                <div
-                  className={`role-card ${selectedCategory === 'INVESTOR' ? 'selected' : ''}`}
-                  onClick={() => {
-                    setSelectedCategory('INVESTOR')
-                    if (!['Startup', 'SME', 'Early Stage', 'Seed', 'Series A/B', 'Growth', 'Strategic Investor'].includes(selectedSubRole)) {
-                      setSelectedSubRole('Startup')
-                    }
-                  }}
-                >
-                  <div className="role-card-header">
-                    <div className="role-icon-box">
-                      <TrendingUp size={22} color="#0066ff" />
-                    </div>
-                    <div className="role-info">
-                      <h3 className="role-category-name">3. INVESTOR</h3>
-                      <p className="role-category-desc">Venture capital &amp; financial partners</p>
-                    </div>
-                    {selectedCategory === 'INVESTOR' && (
-                      <div className="role-check-badge">
-                        <Check size={14} color="#ffffff" />
-                      </div>
-                    )}
+                  <div className="popup-security-footer">
+                    <ShieldCheck size={15} color="#0066ff" />
+                    <span>100% Secure • Your information is always protected</span>
                   </div>
-
-                  {selectedCategory === 'INVESTOR' && (
-                    <div className="subroles-container">
-                      <div className="subrole-group">
-                        <span className="subroles-label">1. ANGEL INVESTOR:</span>
-                        <div className="subroles-pills">
-                          {['Startup', 'SME', 'Early Stage'].map((sub) => (
-                            <button
-                              key={sub}
-                              type="button"
-                              className={`subrole-pill ${selectedSubRole === sub ? 'active' : ''}`}
-                              onClick={(e) => {
-                                e.stopPropagation()
-                                setSelectedCategory('INVESTOR')
-                                setSelectedSubRole(sub)
-                              }}
-                            >
-                              {sub}
-                            </button>
-                          ))}
-                        </div>
-                      </div>
-
-                      <div className="subrole-group" style={{ marginTop: '8px' }}>
-                        <span className="subroles-label">2. VC INVESTOR:</span>
-                        <div className="subroles-pills">
-                          {['Seed', 'Series A/B'].map((sub) => (
-                            <button
-                              key={sub}
-                              type="button"
-                              className={`subrole-pill ${selectedSubRole === sub ? 'active' : ''}`}
-                              onClick={(e) => {
-                                e.stopPropagation()
-                                setSelectedCategory('INVESTOR')
-                                setSelectedSubRole(sub)
-                              }}
-                            >
-                              {sub}
-                            </button>
-                          ))}
-                        </div>
-                      </div>
-
-                      <div className="subrole-group" style={{ marginTop: '8px' }}>
-                        <span className="subroles-label">3. CORPORATE INVESTOR:</span>
-                        <div className="subroles-pills">
-                          {['Growth', 'Strategic Investor'].map((sub) => (
-                            <button
-                              key={sub}
-                              type="button"
-                              className={`subrole-pill ${selectedSubRole === sub ? 'active' : ''}`}
-                              onClick={(e) => {
-                                e.stopPropagation()
-                                setSelectedCategory('INVESTOR')
-                                setSelectedSubRole(sub)
-                              }}
-                            >
-                              {sub}
-                            </button>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              </div>
-
-              <button
-                type="button"
-                className="primary-auth-button role-submit-btn"
-                onClick={() => {
-                  setShowRoleSelectionPopup(false)
-                  setPassword('')
-                  setConfirmPassword('')
-                  const roleName = selectedSubRole ? `${selectedCategory} (${selectedSubRole})` : selectedCategory
-                  showToast(`Selected ${roleName}! Welcome to HynaBiz.`)
-                  if (selectedCategory === 'BUSINESS' && (selectedSubRole === 'Owner' || !selectedSubRole)) {
-                    setTimeout(() => {
-                      navigate('/owner/onboarding')
-                    }, 400)
-                  }
-                }}
-              >
-                <span>Continue to HynaBiz</span>
-                <ArrowRight size={18} />
-              </button>
+                </>
+              )}
             </div>
           </div>
         )}
