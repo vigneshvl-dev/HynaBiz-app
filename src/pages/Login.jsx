@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Mail, Lock, Eye, EyeOff, ArrowRight, Sparkles, X, Briefcase, UserCheck, TrendingUp, Check, Building2, CheckCircle2, Store, ShoppingBag, Package, Truck, Factory, ChevronRight, ShieldCheck, User } from 'lucide-react'
+import { Mail, Lock, Eye, EyeOff, ArrowRight, Sparkles, X, Briefcase, UserCheck, TrendingUp, Check, Building2, CheckCircle2, Store, ShoppingBag, Package, Truck, Factory, ChevronRight, ShieldCheck, User, ChevronLeft } from 'lucide-react'
 import AuthIllustration from '../components/AuthIllustration'
+import Logo from '../components/Logo'
 import SocialLogin from '../components/SocialLogin'
 import Divider from '../components/Divider'
 import PrimaryButton from '../components/PrimaryButton'
@@ -116,12 +117,26 @@ const SUBROLE_GOALS = {
   ]
 }
 
+const FEATURES_STACK = [
+  { label: 'Earn', title: 'Earn', icon: '✨' },
+  { label: 'Spend', title: 'Spend', icon: '💳' },
+  { label: 'Invest', title: 'Invest', icon: '📈' }
+]
+
 export default function Login() {
   const navigate = useNavigate()
   const [toastMessage, setToastMessage] = useState('')
   const [toastVisible, setToastVisible] = useState(false)
-  const [introStage, setIntroStage] = useState('active')
+  const [introStage, setIntroStage] = useState('welcome')
+  const [activeFeatureIndex, setActiveFeatureIndex] = useState(1)
   const [pageStage, setPageStage] = useState('entering')
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActiveFeatureIndex((prev) => (prev + 1) % FEATURES_STACK.length)
+    }, 2500)
+    return () => clearInterval(timer)
+  }, [])
   const [authMode, setAuthMode] = useState('signup')
   const [emailOrPhone, setEmailOrPhone] = useState('')
   const [password, setPassword] = useState('')
@@ -145,19 +160,7 @@ export default function Login() {
     setTimeout(() => navigate(path), 380)
   }
 
-  useEffect(() => {
-    const leaveTimer = setTimeout(() => {
-      setIntroStage('leaving')
-    }, 2800)
-    const doneTimer = setTimeout(() => {
-      setIntroStage('done')
-    }, 3550)
 
-    return () => {
-      clearTimeout(leaveTimer)
-      clearTimeout(doneTimer)
-    }
-  }, [])
 
   useEffect(() => {
     if (toastVisible) {
@@ -230,50 +233,123 @@ export default function Login() {
         </div>
 
         <div className="auth-viewport">
-          {introStage !== 'done' ? (
-            <div className={`login-intro-container stage-${introStage}`}>
-              <div className="intro-illustration-box">
-                <div className="orbital-ring ring-1" />
-                <div className="orbital-ring ring-2" />
+          {introStage === 'welcome' ? (
+            <div className="onboarding-welcome-view blue-above-white-theme">
+              {/* Blue Top Background Hero Area */}
+              <div className="welcome-hero-blue-top">
+                <div className="blue-top-gradient-bg" />
 
-                <div className="central-avatar pulse-avatar">
-                  <svg viewBox="0 0 100 100" className="intro-avatar-svg" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                      <linearGradient id="intro-bg" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stopColor="#0066ff" />
-                        <stop offset="100%" stopColor="#00d2ff" />
-                      </linearGradient>
-                    </defs>
-                    <circle cx="50" cy="50" r="48" fill="url(#intro-bg)" />
-                    <path d="M 26 88 C 26 74, 34 64, 50 64 C 66 64, 74 74, 74 88 Z" fill="#ffffff" />
-                    <circle cx="50" cy="38" r="16" fill="#ffffff" />
-                    <path d="M 47 54 L 53 54 L 55 64 L 50 69 L 45 64 Z" fill="#0066ff" />
+                {/* Top Brand Header */}
+                <div className="welcome-brand-header-top">
+                  <Logo className="welcome-logo-img-white" />
+                  <span className="welcome-brand-text-white">
+                    Hyna<span className="welcome-brand-accent-cyan">Biz</span>
+                  </span>
+                </div>
+
+                {/* 4-Point Sparkle Star */}
+                <div className="hero-sparkle-star-top">
+                  <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M20 0C20 11.0457 28.9543 20 40 20C28.9543 20 20 28.9543 20 40C20 28.9543 11.0457 20 0 20C11.0457 20 20 11.0457 20 0Z" fill="#FFFFFF" />
                   </svg>
                 </div>
 
-                <div className="orbiting-node node-left">
-                  <svg viewBox="0 0 100 100" width="40" height="40">
-                    <circle cx="50" cy="50" r="48" fill="#dbeafe" />
-                    <path d="M 25 85 C 25 72, 33 62, 50 62 C 67 62, 75 72, 75 85 Z" fill="#3b82f6" />
-                    <circle cx="50" cy="38" r="16" fill="#fcd34d" />
-                  </svg>
-                </div>
-
-                <div className="orbiting-node node-right">
-                  <svg viewBox="0 0 100 100" width="40" height="40">
-                    <circle cx="50" cy="50" r="48" fill="#ffedd5" />
-                    <path d="M 25 85 C 25 72, 33 62, 50 62 C 67 62, 75 72, 75 85 Z" fill="#fdba74" />
-                    <circle cx="50" cy="38" r="16" fill="#374151" />
-                  </svg>
+                {/* Vertical Feature Stack (Matching Image 2: Earn, Spend, Invest) */}
+                <div className="vertical-feature-stack">
+                  {FEATURES_STACK.map((item, idx) => {
+                    const isActive = idx === activeFeatureIndex
+                    return (
+                      <div
+                        key={item.label}
+                        className={`feature-stack-row ${isActive ? 'active' : 'muted'}`}
+                        onClick={() => setActiveFeatureIndex(idx)}
+                      >
+                        {isActive ? (
+                          <div className="feature-active-pill">
+                            <span className="feature-pill-icon">{item.icon}</span>
+                            <span className="feature-pill-title">{item.title}</span>
+                          </div>
+                        ) : (
+                          <span className="feature-muted-label">{item.label}</span>
+                        )}
+                      </div>
+                    )
+                  })}
                 </div>
               </div>
 
-              <h2 className="intro-headline">
-                Connect Buyers, Distributors &amp; Businesses
-              </h2>
+              {/* White Bottom Section */}
+              <div className="welcome-content-white-bottom">
+                {/* Title Section */}
+                <div className="welcome-text-content">
+                  <h2 className="welcome-headline">
+                    Manage Better. Grow Bigger.
+                    <br />
+                    <span className="welcome-headline-sub">Anytime, anywhere</span>
+                  </h2>
+                </div>
+
+                {/* Action Buttons */}
+                <div className="welcome-action-buttons">
+                  <button
+                    type="button"
+                    className="btn-get-started"
+                    onClick={() => {
+                      setAuthMode('signup')
+                      setIntroStage('done')
+                    }}
+                  >
+                    Get Started
+                  </button>
+                  <button
+                    type="button"
+                    className="btn-already-account"
+                    onClick={() => {
+                      setAuthMode('login')
+                      setIntroStage('done')
+                    }}
+                  >
+                    I already have an account
+                  </button>
+                </div>
+
+                {/* Terms Footer */}
+                <div className="welcome-terms-footer">
+                  By continuing you agree to our{' '}
+                  <a
+                    href="#terms"
+                    onClick={(e) => {
+                      e.preventDefault()
+                      showToast('Terms of Services page')
+                    }}
+                  >
+                    Terms of Services
+                  </a>{' '}
+                  and{' '}
+                  <a
+                    href="#privacy"
+                    onClick={(e) => {
+                      e.preventDefault()
+                      showToast('Privacy Policy page')
+                    }}
+                  >
+                    Privacy Policy
+                  </a>
+                </div>
+              </div>
             </div>
           ) : (
             <>
+              <div className="form-back-bar">
+                <button
+                  type="button"
+                  className="form-back-button"
+                  onClick={() => setIntroStage('welcome')}
+                >
+                  <ChevronLeft size={18} /> Back
+                </button>
+              </div>
+
               <div className="auth-top-illustration-section">
                 <AuthIllustration />
               </div>

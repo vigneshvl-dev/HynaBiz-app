@@ -45,7 +45,7 @@ export default function HandwrittenTitle() {
         <h1 className="app-title brand-title">
           {LETTERS.map((letter, idx) => {
             const isRevealed = idx < visibleCount
-            const isCurrentWritingLetter = idx === visibleCount - 1
+            const isCurrentWritingLetter = !isComplete && idx === visibleCount - 1
 
             return (
               <span
@@ -66,7 +66,7 @@ export default function HandwrittenTitle() {
 
       {/* Tagline Fades In Afterward */}
       <p className={`app-tagline ${showTagline ? 'tagline-visible' : ''}`}>
-        Connect. Discover. Grow.
+        Manage Better. Grow Bigger.
       </p>
     </div>
   )
