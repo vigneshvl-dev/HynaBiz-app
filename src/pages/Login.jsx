@@ -234,25 +234,18 @@ export default function Login() {
 
         <div className="auth-viewport">
           {introStage === 'welcome' ? (
-            <div className="onboarding-welcome-view blue-above-white-theme">
-              {/* Blue Top Background Hero Area */}
-              <div className="welcome-hero-blue-top">
-                <div className="blue-top-gradient-bg" />
-
+            <div className="onboarding-welcome-view white-above-blue-theme">
+              {/* White Top Hero Area */}
+              <div className="welcome-hero-white-top">
                 {/* Top Brand Header */}
                 <div className="welcome-brand-header-top">
-                  <Logo className="welcome-logo-img-white" />
-                  <span className="welcome-brand-text-white">
-                    Hyna<span className="welcome-brand-accent-cyan">Biz</span>
+                  <Logo className="welcome-logo-img" />
+                  <span className="welcome-brand-text">
+                    Hyna<span className="welcome-brand-accent">Biz</span>
                   </span>
                 </div>
 
-                {/* 4-Point Sparkle Star */}
-                <div className="hero-sparkle-star-top">
-                  <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M20 0C20 11.0457 28.9543 20 40 20C28.9543 20 20 28.9543 20 40C20 28.9543 11.0457 20 0 20C11.0457 20 20 11.0457 20 0Z" fill="#FFFFFF" />
-                  </svg>
-                </div>
+
 
                 {/* Vertical Feature Stack (Matching Image 2: Earn, Spend, Invest) */}
                 <div className="vertical-feature-stack">
@@ -278,22 +271,24 @@ export default function Login() {
                 </div>
               </div>
 
-              {/* White Bottom Section */}
-              <div className="welcome-content-white-bottom">
+              {/* Blue Bottom Section */}
+              <div className="welcome-content-blue-bottom">
+                <div className="blue-bottom-gradient-bg" />
+
                 {/* Title Section */}
-                <div className="welcome-text-content">
-                  <h2 className="welcome-headline">
+                <div className="welcome-text-content z-index-2">
+                  <h2 className="welcome-headline-white">
                     Manage Better. Grow Bigger.
                     <br />
-                    <span className="welcome-headline-sub">Anytime, anywhere</span>
+                    <span className="welcome-headline-sub-cyan">Anytime, anywhere</span>
                   </h2>
                 </div>
 
                 {/* Action Buttons */}
-                <div className="welcome-action-buttons">
+                <div className="welcome-action-buttons z-index-2">
                   <button
                     type="button"
-                    className="btn-get-started"
+                    className="btn-get-started-white"
                     onClick={() => {
                       setAuthMode('signup')
                       setIntroStage('done')
@@ -303,7 +298,7 @@ export default function Login() {
                   </button>
                   <button
                     type="button"
-                    className="btn-already-account"
+                    className="btn-already-account-glass"
                     onClick={() => {
                       setAuthMode('login')
                       setIntroStage('done')
@@ -314,7 +309,7 @@ export default function Login() {
                 </div>
 
                 {/* Terms Footer */}
-                <div className="welcome-terms-footer">
+                <div className="welcome-terms-footer-light z-index-2">
                   By continuing you agree to our{' '}
                   <a
                     href="#terms"
