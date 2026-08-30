@@ -1,32 +1,8 @@
-import React, { useState } from 'react'
-import { useNavigate, useLocation } from 'react-router-dom'
-import {
-  Bell,
-  Search,
-  Plus,
-  X,
-  MessageSquare
-} from 'lucide-react'
+import React from 'react'
 import { useOwner } from '../../context/OwnerContext'
 
 export default function OwnerLayout({ children }) {
-  const navigate = useNavigate()
-  const location = useLocation()
-  const { ownerProfile, businessProfile, notifications } = useOwner()
-
-  const [searchQuery, setSearchQuery] = useState('')
-  const [showCreateModal, setShowCreateModal] = useState(false)
-
-  const unreadCount = notifications.filter((n) => !n.read).length
-
-
-
-  const handleGlobalSearch = (e) => {
-    e.preventDefault()
-    if (searchQuery.trim()) {
-      navigate(`/owner/ai?query=${encodeURIComponent(searchQuery)}`)
-    }
-  }
+  const { ownerProfile } = useOwner()
 
   return (
     <div className="owner-platform-layout">
@@ -57,74 +33,9 @@ export default function OwnerLayout({ children }) {
 
       {/* Main View Area */}
       <div className="owner-main-content">
-        {/* Top Header Bar */}
-        <header className="owner-top-bar">
-          <form onSubmit={handleGlobalSearch} className="top-bar-search">
-            <Search size={16} color="#64748b" />
-            <input
-              type="text"
-              placeholder="Tell Hyna AI what your business needs..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="top-bar-search-input"
-            />
-          </form>
-
-          <div className="top-bar-actions">
-            <button
-              type="button"
-              className="btn-primary-owner"
-              style={{ padding: '8px 14px', fontSize: '0.8rem' }}
-              onClick={() => setShowCreateModal(true)}
-            >
-              <Plus size={16} />
-              <span>+ Create</span>
-            </button>
-
-            <button
-              type="button"
-              className="icon-btn-top"
-              onClick={() => navigate('/owner/messages')}
-              title="Messages"
-            >
-              <MessageSquare size={18} />
-              <span className="nav-badge-count">5</span>
-            </button>
-
-            <button
-              type="button"
-              className="icon-btn-top"
-              onClick={() => navigate('/owner/notifications')}
-              title="Notifications"
-            >
-              <Bell size={18} />
-              {unreadCount > 0 && <span className="nav-badge-count">{unreadCount}</span>}
-            </button>
-
-            <div
-              className="top-profile-badge"
-              onClick={() => navigate('/owner/profile')}
-              title="View Profile"
-            >
-              <img
-                src={ownerProfile.avatarUrl}
-                alt={ownerProfile.fullName}
-                className="top-avatar-img"
-              />
-            </div>
-          </div>
-        </header>
-
         {/* Content Body */}
         <main className="dashboard-content-body">{children}</main>
-
-        {/* Mobile Bottom Navigation Bar */}
-        <nav className="owner-mobile-nav">
-          {/* Mobile nav items removed */}
-        </nav>
       </div>
-
-
     </div>
   )
 }
